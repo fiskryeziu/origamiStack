@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
-import origamivase from "../assets/images/origamivase.jpg";
-import origami2 from "../assets/images/origami2.jpg";
-import origami3 from "../assets/images/origami3.jpg";
-import origami4 from "../assets/images/origami4.jpg";
-import origami5 from "../assets/images/origami5.jpg";
+import products from "../product";
 
 const ProductScreen = () => {
   const [value, setValue] = useState(0);
@@ -38,12 +34,14 @@ const ProductScreen = () => {
             </button>
           </div>
           <div className="flex flex-row justify-center items-center flex-wrap">
-            <Card width={200} height={300} image={origamivase} />
-            <Card width={200} height={300} image={origami2} />
-            <Card width={200} height={300} image={origami3} />
-            <Card width={200} height={300} image={origami4} />
-            <Card width={200} height={300} image={origami5} />
-            <Card width={200} height={300} image={origami2} />
+            {products.map((product) => (
+              <Card
+                key={product._id}
+                width={200}
+                height={300}
+                product={product}
+              />
+            ))}
           </div>
         </div>
         <nav aria-label="Page navigation example" className="m-10">

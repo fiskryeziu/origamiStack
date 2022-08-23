@@ -5,11 +5,6 @@ import { Link } from "react-router-dom";
 import Card from "../components/Card";
 import section from "../assets/images/section.jpg";
 import Carousel from "../components/Carousel";
-import origamivase from "../assets/images/origamivase.jpg";
-import origami2 from "../assets/images/origami2.jpg";
-import origami3 from "../assets/images/origami3.jpg";
-import origami4 from "../assets/images/origami4.jpg";
-import origami5 from "../assets/images/origami5.jpg";
 import products from "../product.js";
 
 const HomeScreen = () => {

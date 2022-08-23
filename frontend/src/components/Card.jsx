@@ -7,7 +7,7 @@ const Card = ({ width, height, product }) => {
   return (
     <div className="flex justify-center">
       <Link
-        to={`/product-details/${product._id}}`}
+        to={`/product-details/${product._id}`}
         className="rounded-lg shadow-lg bg-white max-w-sm m-2"
       >
         <img

@@ -1,10 +1,14 @@
 import React from "react";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
-import origamivase from "../assets/images/origamivase.jpg";
 import Rating from "../components/Rating";
-
+import products from "../product";
+import { useParams } from "react-router-dom";
+//mongoDB tash
 const SingleProduct = () => {
+  const params = useParams();
+  const productId = params.id;
+  const product = products.find((item) => item._id === productId);
   return (
     <>
       <NavBar />
@@ -13,26 +17,22 @@ const SingleProduct = () => {
         {/* col1  */}
         <div className="flex  w-full md:w-1/2 justify-center">
           <div className="max-w-xs">
-            <img src={origamivase} alt="" />
+            <img src={product.image} alt="" />
           </div>
         </div>
         {/* col2  */}
         <div className="flex w-full md:w-1/4 flex-col border-2 mr-10">
           <div className="py-10 px-1">
-            <h1 className="text-4xl text-gray-800">Flower Vase</h1>
+            <h1 className="text-4xl text-gray-800">{product.name}</h1>
           </div>
           <div className="py-4 border-t-2 flex items-center px-1">
-            <Rating />
+            <Rating value={product.rating} />
           </div>
           <div className="py-4 border-2 flex items-center px-1">
-            <h1>price 200$</h1>
+            <h1>{product.price}$</h1>
           </div>
           <div className="p-1">
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error,
-              ab ipsam. Dolore nam nostrum ipsum dolores culpa rerum, cumque
-              sed.
-            </p>
+            <p>{product.description}</p>
           </div>
         </div>
 
@@ -40,11 +40,11 @@ const SingleProduct = () => {
         <div className="flex w-full md:w-1/4 flex-col">
           <div className="flex justify-between border-2 p-2 flex-col lg:flex-row">
             <p>Price</p>
-            <p>$399</p>
+            <p>{product.price}$</p>
           </div>
           <div className="flex justify-between border-x-2 p-2 border-b-2 flex-col lg:flex-row">
             <p>Status</p>
-            <p>In Stock</p>
+            <p>{product.countInStock > 0 ? "In Stock" : "Out of stock"}</p>
           </div>
           <div className="flex justify-between border-x-2 p-2 flex-col lg:flex-row">
             <p>qty</p>
@@ -57,7 +57,10 @@ const SingleProduct = () => {
             </select>
           </div>
           <div className="border-2 p-3 flex justify-center">
-            <button className="bg-gray-900 text-white w-full py-2 hover:brightness-125">
+            <button
+              className="bg-gray-900 text-white w-full py-2 hover:brightness-125"
+              disabled={product.countInStock === 0}
+            >
               ADD TO CART
             </button>
           </div>
