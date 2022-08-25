@@ -1,6 +1,6 @@
-import React from "react";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
+import React from 'react';
+import Footer from '../components/Footer';
+import NavBar from '../components/NavBar';
 
 const ContactScreen = () => {
   return (
@@ -24,21 +24,21 @@ const ContactScreen = () => {
           </p>
           <div className="flex flex-col">
             <div className="flex items-center space-x-2">
-              <i className="fa fa-location-arrow"></i>{" "}
+              <i className="fa fa-location-arrow"></i>{' '}
               <p className="text-gray-600">Our location</p>
             </div>
             <p className="font-bold">Lekë Matranga, Prizren</p>
           </div>
           <div className="flex flex-col">
             <div className="flex items-center space-x-2">
-              <i className="fa fa-phone-alt"></i>{" "}
+              <i className="fa fa-phone-alt"></i>{' '}
               <p className="text-gray-600">Call us</p>
             </div>
             <p className="font-bold">+123456789</p>
           </div>
           <div className="flex flex-col">
             <div className="flex items-center space-x-2">
-              <i className="fa fa-envelope"></i>{" "}
+              <i className="fa fa-envelope"></i>{' '}
               <p className="text-gray-600">Our location</p>
             </div>
             <p className="font-bold">origamihandmade8@gmail.com</p>

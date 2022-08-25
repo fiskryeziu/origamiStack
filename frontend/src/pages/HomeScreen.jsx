@@ -1,14 +1,23 @@
-import React from "react";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
-import { Link } from "react-router-dom";
-import Card from "../components/Card";
-import section from "../assets/images/section.jpg";
-import Carousel from "../components/Carousel";
-import products from "../product.js";
+import React, { useState, useEffect } from 'react';
+import Footer from '../components/Footer';
+import NavBar from '../components/NavBar';
+import { Link } from 'react-router-dom';
+import Card from '../components/Card';
+import section from '../assets/images/section.jpg';
+import Carousel from '../components/Carousel';
+import axios from 'axios';
 
 const HomeScreen = () => {
+  const [products, setProducts] = useState([]);
+
   console.log(products);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get('/products');
+      setProducts(data);
+    };
+    fetchProducts();
+  }, []);
   return (
     <>
       <NavBar />

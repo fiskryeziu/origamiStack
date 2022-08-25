@@ -1,14 +1,25 @@
-import React from "react";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
-import Rating from "../components/Rating";
-import products from "../product";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import Footer from '../components/Footer';
+import NavBar from '../components/NavBar';
+import Rating from '../components/Rating';
+import products from '../product';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 //mongoDB tash
 const SingleProduct = () => {
   const params = useParams();
   const productId = params.id;
-  const product = products.find((item) => item._id === productId);
+
+  const [product, setProduct] = useState([]);
+
+  console.log(products);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get(`/products/${productId}`);
+      setProduct(data);
+    };
+    fetchProducts();
+  }, [productId]);
   return (
     <>
       <NavBar />
@@ -44,7 +55,7 @@ const SingleProduct = () => {
           </div>
           <div className="flex justify-between border-x-2 p-2 border-b-2 flex-col lg:flex-row">
             <p>Status</p>
-            <p>{product.countInStock > 0 ? "In Stock" : "Out of stock"}</p>
+            <p>{product.countInStock > 0 ? 'In Stock' : 'Out of stock'}</p>
           </div>
           <div className="flex justify-between border-x-2 p-2 flex-col lg:flex-row">
             <p>qty</p>
