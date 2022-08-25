@@ -8,6 +8,7 @@ import section from '../assets/images/section.jpg'
 import Carousel from '../components/Carousel'
 import { fetchProducts } from '../reducers/productSlice'
 import Spinner from '../components/Spinner'
+import Alert from '../components/Alert'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
@@ -64,7 +65,7 @@ const HomeScreen = () => {
               </div>
               <div className="flex flex-row justify-center items-center flex-wrap">
                 {error ? (
-                  <h2>{error}</h2>
+                  <Alert color="red">{error}</Alert>
                 ) : (
                   <>
                     {products.map((product) => (
