@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import Footer from '../components/Footer';
-import NavBar from '../components/NavBar';
-import Rating from '../components/Rating';
-import products from '../product';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-//mongoDB tash
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import Footer from '../components/Footer'
+import NavBar from '../components/NavBar'
+import Rating from '../components/Rating'
+import { fetchProductsDetails } from '../reducers/productDetailsSlice'
+
 const SingleProduct = () => {
-  const params = useParams();
-  const productId = params.id;
+  const params = useParams()
+  const productId = params.id
+  const dispatch = useDispatch()
+  const productListDetails = useSelector((state) => state.productListDetails)
 
-  const [product, setProduct] = useState([]);
+  const { error, loading, product } = productListDetails
 
-  console.log(products);
   useEffect(() => {
-    const fetchProducts = async () => {
-      const { data } = await axios.get(`/products/${productId}`);
-      setProduct(data);
-    };
-    fetchProducts();
-  }, [productId]);
+    dispatch(fetchProductsDetails(productId))
+  }, [productId, dispatch])
+
   return (
     <>
       <NavBar />
@@ -110,7 +108,7 @@ const SingleProduct = () => {
       </div>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default SingleProduct;
+export default SingleProduct
