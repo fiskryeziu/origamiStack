@@ -1,11 +1,23 @@
-import React, { useState } from "react";
-import Card from "../components/Card";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
-import products from "../product";
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Card from '../components/Card'
+import Footer from '../components/Footer'
+import NavBar from '../components/NavBar'
+import products from '../product'
+import { fetchProducts } from '../reducers/productSlice'
 
 const ProductScreen = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0)
+  const dispatch = useDispatch()
+
+  const productList = useSelector((state) => state.productList)
+
+  const { loading, error, products } = productList
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [dispatch])
   return (
     <>
       <NavBar />
@@ -91,7 +103,7 @@ const ProductScreen = () => {
       </div>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default ProductScreen;
+export default ProductScreen

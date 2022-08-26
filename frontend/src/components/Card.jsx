@@ -1,6 +1,6 @@
-import React from "react";
-import Rating from "./Rating";
-import { Link } from "react-router-dom";
+import React from 'react'
+import Rating from './Rating'
+import { Link } from 'react-router-dom'
 
 const Card = ({ width, height, product }) => {
   // any id but in the future get it from the db
@@ -26,7 +26,7 @@ const Card = ({ width, height, product }) => {
         </div>
       </Link>
     </div>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

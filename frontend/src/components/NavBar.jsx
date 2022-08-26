@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { BsBagFill } from "react-icons/bs";
-import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "../assets/images/origamihandmade.png";
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { BsBagFill } from 'react-icons/bs'
+import { FaBars, FaTimes } from 'react-icons/fa'
+import logo from '../assets/images/origamihandmade.png'
+import { useSelector } from 'react-redux'
 
 const NavBar = () => {
-  const [open, setOpen] = useState(false);
-  const [nav, setNav] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [nav, setNav] = useState(false)
+
+  const cart = useSelector((state) => state.cart)
+  const { cartItems } = cart
   const handleClick = () => {
-    setNav(!nav);
-  };
+    setNav(!nav)
+  }
   return (
     <div className="relative h-[80px] border-b-2 bg-slate-100">
       <div className="flex justify-between items-center h-full w-full px-5">
@@ -36,7 +40,9 @@ const NavBar = () => {
             className="flex items-center relative justify-center"
           >
             <BsBagFill size="30px" />
-            <p className="text-white text-base absolute pt-1">1</p>
+            <p className="text-white text-base absolute pt-1">
+              {cartItems.length}
+            </p>
           </Link>
           {/* mobile menu  */}
         </div>
@@ -52,7 +58,7 @@ const NavBar = () => {
         <Link to="/my-account">My Account</Link>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar
