@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Footer from '../components/Footer'
+import NavBar from '../components/NavBar'
 
 const MyAccountScreen = () => {
-  const [isAdmin, setIsAdmin] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/sign-in");
+      navigate('/sign-in')
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn, navigate])
 
   return (
     <>
@@ -20,7 +20,7 @@ const MyAccountScreen = () => {
       <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[60vh] relative bg-myaccount bg-cover bg-center bg-no-repeat">
         <div className="z-10 flex items-center h-[200px]">
           <h1 className="text-white z-10 text-center text-4xl">
-            {isAdmin ? "Welcome Admin" : "My Account"}
+            {isAdmin ? 'Welcome Admin' : 'My Account'}
           </h1>
         </div>
         <div className="bg-black opacity-70 absolute w-full h-full top-0"></div>
@@ -59,7 +59,7 @@ const MyAccountScreen = () => {
       </div>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default MyAccountScreen;
+export default MyAccountScreen

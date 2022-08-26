@@ -1,9 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
+import NavBar from '../components/NavBar'
 
 const LoginScreen = () => {
+  const [formData, setFormData] = useState({})
   return (
     <div className="flex flex-col h-screen">
       <NavBar />
@@ -57,7 +58,7 @@ const LoginScreen = () => {
       </div>
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default LoginScreen;
+export default LoginScreen
