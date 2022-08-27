@@ -43,7 +43,6 @@ const LoginScreen = () => {
     }
     //dispatch login user
     dispatch(loginActions(userData))
-    navigate('/')
   }
   return (
     <>

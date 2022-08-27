@@ -15,7 +15,12 @@ export const loginActions = createAsyncThunk(
   'userLogin/loginActions',
   async (userData, thunkAPI) => {
     try {
-      const { data } = await axios.post('users/login', userData)
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      const { data } = await axios.post('users/login', userData, config)
 
       if (data) {
         localStorage.setItem('userInfo', JSON.stringify(data))
@@ -55,7 +60,7 @@ const userSlice = createSlice({
       })
       .addCase(loginActions.rejected, (state, action) => {
         state.loading = false
-        state.error = action.error.message
+        state.error = action.payload.message
       })
   },
 })
