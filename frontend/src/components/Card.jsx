@@ -11,7 +11,7 @@ const Card = ({ width, height, product }) => {
         className="rounded-lg shadow-lg bg-white max-w-sm m-2"
       >
         <img
-          className={`rounded-t-md w-[${width}px] h-[${height}px] object-contain`}
+          className={`rounded-t-md w-[${width}px] h-[${height}px] mx-auto object-contain`}
           src={product.image}
           alt=""
         />

@@ -6,7 +6,6 @@ import logo from '../assets/images/origamihandmade.png'
 import { useSelector } from 'react-redux'
 
 const NavBar = () => {
-  const [open, setOpen] = useState(false)
   const [nav, setNav] = useState(false)
 
   const cart = useSelector((state) => state.cart)

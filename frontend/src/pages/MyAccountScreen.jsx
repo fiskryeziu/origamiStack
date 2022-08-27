@@ -1,26 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 
 const MyAccountScreen = () => {
-  const [isAdmin, setIsAdmin] = useState(true)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const navigate = useNavigate()
 
+  const userLogin = useSelector((state) => state.userLogin)
+  console.log(userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!userInfo) {
       navigate('/sign-in')
     }
-  }, [isLoggedIn, navigate])
+  }, [userInfo, navigate])
 
+  const signOutHandler = () => {
+    console.log('sign out')
+  }
   return (
     <>
       <NavBar />
       <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[60vh] relative bg-myaccount bg-cover bg-center bg-no-repeat">
         <div className="z-10 flex items-center h-[200px]">
           <h1 className="text-white z-10 text-center text-4xl">
-            {isAdmin ? 'Welcome Admin' : 'My Account'}
+            {userInfo.isAdmin ? 'Welcome Admin' : `Welcome ${userInfo.name}`}
           </h1>
         </div>
         <div className="bg-black opacity-70 absolute w-full h-full top-0"></div>
@@ -40,7 +46,7 @@ const MyAccountScreen = () => {
           </div>
         </div>
         <div className="bg-gray-200 w-full md:w-60 h-40 flex justify-center items-center  rounded-t-lg">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center" onClick={signOutHandler}>
             <i className="fa fa-sign-out-alt text-gray-700 text-7xl" />
             <p className="text-2xl font-thin">Sign Out</p>
           </div>
@@ -49,7 +55,7 @@ const MyAccountScreen = () => {
       {/* text info  */}
       <div className="flex w-full space-y-10 justify-center my-10 px-2">
         <div className="w-[45rem] flex flex-col">
-          <p className="text-gray-700">Hello Fisnik</p>
+          <p className="text-gray-700">Hello {userInfo.name}</p>
           <p className="text-gray-700">
             From your account dashboard you can view your recent orders, manage
             your shipping and billing addresses, and edit your password and
