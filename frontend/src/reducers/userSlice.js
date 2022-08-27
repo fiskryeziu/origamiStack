@@ -20,6 +20,7 @@ export const loginActions = createAsyncThunk(
       if (data) {
         localStorage.setItem('userInfo', JSON.stringify(data))
       }
+      return await data
     } catch (error) {
       const message =
         error.response && error.response.data
@@ -30,10 +31,18 @@ export const loginActions = createAsyncThunk(
     }
   }
 )
-
+export const logout = () => (dispatch, getState) => {
+  localStorage.removeItem('userInfo')
+  dispatch(userLogout())
+}
 const userSlice = createSlice({
   name: 'userLogin',
   initialState,
+  reducers: {
+    userLogout(state) {
+      state.userInfo = null
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginActions.pending, (state, action) => {
@@ -51,4 +60,5 @@ const userSlice = createSlice({
   },
 })
 
+const { userLogout } = userSlice.actions
 export default userSlice.reducer

@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { loginActions } from '../reducers/userSlice'
+import { useEffect } from 'react'
+import Spinner from '../components/Spinner'
+import Alert from '../components/Alert'
 
 const LoginScreen = () => {
   const [formData, setFormData] = useState({
@@ -11,24 +14,34 @@ const LoginScreen = () => {
     password: '',
   })
   const { email, password } = formData
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, error, userInfo } = userLogin
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  //nese useri eshte i kyqyr
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/my-account')
+    }
+  }, [navigate, userInfo])
 
   const onChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
     }))
-
     console.log(formData)
   }
+
   const submitHandler = (e) => {
     e.preventDefault()
     const userData = {
       email,
       password,
     }
+    //dispatch login user
     dispatch(loginActions(userData))
     navigate('/')
   }
@@ -38,6 +51,8 @@ const LoginScreen = () => {
       <div className="flex flex-col h-screen">
         <div className="relative flex flex-1 flex-col items-center justify-center pt-12 pb-16 mx-2">
           <h1 className="text-3xl text-gray-800">Login</h1>
+          {error && <Alert color="bg-red-500">{error}</Alert>}
+          {loading && <Spinner />}
           <form className="w-full max-w-sm" onSubmit={submitHandler}>
             <div className="mb-6">
               <label
