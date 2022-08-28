@@ -9,6 +9,7 @@ import MyAccountScreen from './pages/MyAccountScreen'
 import ProductScreen from './pages/ProductScreen'
 import RegisterScreen from './pages/RegisterScreen'
 import SingleProduct from './pages/SingleProduct'
+import UserProfileScreen from './pages/UserProfileScreen'
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/my-account" element={<MyAccountScreen />} />
         <Route path="/sign-in" element={<LoginScreen />} />
         <Route path="/register" element={<RegisterScreen />} />
+        <Route path="/account-info" element={<UserProfileScreen />} />
         <Route path="/cart">
           <Route index element={<CartScreen />} />
           <Route path=":id" element={<CartScreen />} />

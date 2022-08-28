@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { userDetailsReset } from './userDetailsSlice'
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
@@ -20,7 +21,7 @@ export const loginActions = createAsyncThunk(
           'Content-Type': 'application/json',
         },
       }
-      const { data } = await axios.post('users/login', userData, config)
+      const { data } = await axios.post('/users/login', userData, config)
 
       if (data) {
         localStorage.setItem('userInfo', JSON.stringify(data))
@@ -36,9 +37,36 @@ export const loginActions = createAsyncThunk(
     }
   }
 )
+
+export const registerActions = createAsyncThunk(
+  'userLogin/registerActions',
+  async (userData, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      const { data } = await axios.post('/users', userData, config)
+      if (data) {
+        localStorage.setItem('userInfo', JSON.stringify(data))
+      }
+
+      return data
+    } catch (error) {
+      const message =
+        error.response && error.response.data
+          ? error.response.data
+          : error.message
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const logout = () => (dispatch, getState) => {
   localStorage.removeItem('userInfo')
   dispatch(userLogout())
+  dispatch(userDetailsReset())
 }
 const userSlice = createSlice({
   name: 'userLogin',
@@ -50,7 +78,18 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginActions.pending, (state, action) => {
+      .addCase(registerActions.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(registerActions.fulfilled, (state, action) => {
+        state.loading = false
+        state.userInfo = action.payload
+      })
+      .addCase(registerActions.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload.message
+      })
+      .addCase(loginActions.pending, (state) => {
         state.loading = true
       })
       .addCase(loginActions.fulfilled, (state, action) => {

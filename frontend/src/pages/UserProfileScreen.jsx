@@ -5,28 +5,43 @@ import Alert from '../components/Alert'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
+import { getUserDetails } from '../reducers/userDetailsSlice'
 import { registerActions } from '../reducers/userSlice'
 
-const RegisterScreen = () => {
+const UserProfileScreen = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmpassword: '',
   })
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(null)
   const { name, email, password, confirmpassword } = formData
+
   const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
+  const { userInfo } = userLogin
+
+  const userDetails = useSelector((state) => state.userDetails)
+  const { loading, error, user } = userDetails
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (userInfo) {
+    if (!userInfo) {
       navigate('/')
+    } else {
+      if (!user.name) {
+        dispatch(getUserDetails('profile'))
+      } else {
+        setFormData((prevState) => ({
+          ...prevState,
+          name: user.name,
+          email: user.email,
+        }))
+      }
     }
-  }, [userInfo, navigate])
+  }, [dispatch, navigate, userInfo, user])
 
   const onChange = (e) => {
     setFormData((prev) => ({
@@ -55,7 +70,7 @@ const RegisterScreen = () => {
       <NavBar />
       <div className="flex flex-col h-screen">
         <div className="relative flex flex-1 flex-col items-center justify-center pt-12 pb-16 mx-2">
-          <h1 className="text-3xl text-gray-800">Register</h1>
+          <h1 className="text-3xl text-gray-800">User Profile</h1>
           {message && <Alert color="bg-red-500">{message}</Alert>}
           {error && <Alert color="bg-red-500">{error}</Alert>}
           {loading && <Spinner />}
@@ -134,13 +149,8 @@ const RegisterScreen = () => {
               type="submit"
               className="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full"
             >
-              <span>Register</span>
+              <span>Update</span>
             </button>
-            <p className="mt-8 text-center">
-              <Link to="/sign-in" className="text-sm hover:underline">
-                Sign in
-              </Link>
-            </p>
           </form>
         </div>
         <Footer />
@@ -149,4 +159,4 @@ const RegisterScreen = () => {
   )
 }
 
-export default RegisterScreen
+export default UserProfileScreen
