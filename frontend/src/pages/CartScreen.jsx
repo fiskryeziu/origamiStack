@@ -19,6 +19,9 @@ const CartScreen = () => {
 
   const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty))
@@ -30,7 +33,11 @@ const CartScreen = () => {
   }
 
   const checkoutHandler = () => {
-    navigate('/sign-in')
+    if (!userInfo) {
+      navigate('/sign-in')
+    } else {
+      navigate('/shipping')
+    }
   }
   return (
     <div className="flex flex-col h-screen">

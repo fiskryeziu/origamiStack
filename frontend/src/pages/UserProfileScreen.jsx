@@ -7,6 +7,10 @@ import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
 import { getUserDetails } from '../reducers/userDetailsSlice'
 import { registerActions } from '../reducers/userSlice'
+import {
+  updateUserProfile,
+  userUpdateProfileReset,
+} from '../reducers/userUpdateProfileSlice'
 
 const UserProfileScreen = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +28,9 @@ const UserProfileScreen = () => {
   const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
+  const { success } = userUpdateProfile
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -31,7 +38,8 @@ const UserProfileScreen = () => {
     if (!userInfo) {
       navigate('/')
     } else {
-      if (!user.name) {
+      if (!user || !user.name || success) {
+        dispatch(userUpdateProfileReset())
         dispatch(getUserDetails('profile'))
       } else {
         setFormData((prevState) => ({
@@ -41,7 +49,7 @@ const UserProfileScreen = () => {
         }))
       }
     }
-  }, [dispatch, navigate, userInfo, user])
+  }, [dispatch, navigate, userInfo, user, success])
 
   const onChange = (e) => {
     setFormData((prev) => ({
@@ -53,6 +61,7 @@ const UserProfileScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault()
     const userData = {
+      id: user._id,
       name,
       email,
       password,
@@ -61,8 +70,8 @@ const UserProfileScreen = () => {
     if (password !== confirmpassword) {
       setMessage('Passwords do not match')
     } else {
-      //dispatch login user
-      dispatch(registerActions(userData))
+      //dispatch  updateUserProfile
+      dispatch(updateUserProfile(userData))
     }
   }
   return (
@@ -86,7 +95,6 @@ const UserProfileScreen = () => {
                 type="text"
                 id="name"
                 className="mt-2 appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200"
-                required
                 value={name}
                 placeholder="Name"
                 onChange={onChange}
@@ -104,7 +112,6 @@ const UserProfileScreen = () => {
                 id="email"
                 className="mt-2 appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200"
                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                required
                 value={email}
                 placeholder="Email"
                 onChange={onChange}
@@ -121,7 +128,6 @@ const UserProfileScreen = () => {
                 type="password"
                 id="password"
                 className="mt-2 appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200"
-                required
                 value={password}
                 placeholder="Password"
                 onChange={onChange}
@@ -138,7 +144,6 @@ const UserProfileScreen = () => {
                 type="password"
                 id="confirmpassword"
                 className="mt-2 appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200"
-                required=""
                 value={confirmpassword}
                 placeholder="Confirm password"
                 onChange={onChange}

@@ -8,6 +8,7 @@ import LoginScreen from './pages/LoginScreen'
 import MyAccountScreen from './pages/MyAccountScreen'
 import ProductScreen from './pages/ProductScreen'
 import RegisterScreen from './pages/RegisterScreen'
+import ShippingScreen from './pages/ShippingScreen'
 import SingleProduct from './pages/SingleProduct'
 import UserProfileScreen from './pages/UserProfileScreen'
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route index element={<CartScreen />} />
           <Route path=":id" element={<CartScreen />} />
         </Route>
+        <Route path="/shipping" element={<ShippingScreen />} />
 
         <Route path="/product-details/:id" element={<SingleProduct />} />
       </Routes>
