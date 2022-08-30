@@ -5,6 +5,9 @@ import cartReducer from '../reducers/cartSlice'
 import userLoginReducer from '../reducers/userSlice'
 import userDetailsReducer from '../reducers/userDetailsSlice'
 import userUpdateProfileReducer from '../reducers/userUpdateProfileSlice'
+import orderCreateReducer from '../reducers/orderSlice'
+import orderDetailsReducer from '../reducers/orderDetailsSlice'
+import orderPayReducer from '../reducers/orderPaySlice'
 
 const store = configureStore({
   reducer: {
@@ -14,6 +17,9 @@ const store = configureStore({
     userLogin: userLoginReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
+    orderCreate: orderCreateReducer,
+    orderDetails: orderDetailsReducer,
+    orderPay: orderPayReducer,
   },
 })
 

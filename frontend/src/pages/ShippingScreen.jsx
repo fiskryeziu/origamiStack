@@ -1,19 +1,26 @@
 import React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import Alert from '../components/Alert'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
+import { saveShippingAdress } from '../reducers/cartSlice'
 import CheckoutSteps from './CheckoutSteps'
 
 const ShippingScreen = () => {
+  const cart = useSelector((state) => state.cart)
+  const { shippingAddress } = cart
+
   const [formData, setFormData] = useState({
-    address: '',
-    city: '',
-    postalCode: '',
-    country: '',
+    address: shippingAddress.address,
+    city: shippingAddress.city,
+    postalCode: shippingAddress.postalCode,
+    country: shippingAddress.country,
   })
   const { address, city, postalCode, country } = formData
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const onChange = (e) => {
     setFormData((prev) => ({
@@ -21,9 +28,14 @@ const ShippingScreen = () => {
       [e.target.id]: e.target.value,
     }))
   }
-  const submitHandler = () => {
-    console.log('next ')
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+
+    dispatch(saveShippingAdress({ address, city, postalCode, country }))
+    navigate('/payment')
   }
+
   return (
     <>
       <NavBar />
@@ -60,7 +72,6 @@ const ShippingScreen = () => {
                 type="text"
                 id="city"
                 className="mt-2 appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                 required
                 value={city}
                 placeholder="City"

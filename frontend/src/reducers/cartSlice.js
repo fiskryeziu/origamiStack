@@ -5,13 +5,13 @@ const cartItemFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
   : []
 
-// const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
-//   ? JSON.parse(localStorage.getItem("shippingAddress"))
-//   : {};
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
+  ? JSON.parse(localStorage.getItem('shippingAddress'))
+  : {}
 
 const initialState = {
   cartItems: cartItemFromStorage,
-  //   shippingAddress: shippingAddressFromStorage,
+  shippingAddress: shippingAddressFromStorage,
 }
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
@@ -40,16 +40,16 @@ export const removeFromCart = (id) => (dispatch, getState) => {
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
-// export const saveShippingAdress = (data) => (dispatch) => {
-//   dispatch(cartSaveShippingAddress(data));
+export const saveShippingAdress = (data) => (dispatch) => {
+  dispatch(cartSaveShippingAddress(data))
 
-//   localStorage.setItem("shippingAddress", JSON.stringify(data));
-// };
-// export const savePaymentMethod = (data) => (dispatch) => {
-//   dispatch(cartSavePaymentMethod(data));
+  localStorage.setItem('shippingAddress', JSON.stringify(data))
+}
+export const savePaymentMethod = (data) => (dispatch) => {
+  dispatch(cartSavePaymentMethod(data))
 
-//   localStorage.setItem("paymentMethod", JSON.stringify(data));
-// };
+  localStorage.setItem('paymentMethod', JSON.stringify(data))
+}
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -81,27 +81,27 @@ const cartSlice = createSlice({
         ),
       }
     },
-    // cartSaveShippingAddress(state, action) {
-    //   return {
-    //     ...state,
-    //     shippingAddress: action.payload,
-    //   };
-    // },
-    // cartSavePaymentMethod(state, action) {
-    //   console.log(action);
-    //   return {
-    //     ...state,
-    //     paymentMethod: action.payload,
-    //   };
-    // },
+    cartSaveShippingAddress(state, action) {
+      return {
+        ...state,
+        shippingAddress: action.payload,
+      }
+    },
+    cartSavePaymentMethod(state, action) {
+      console.log(action)
+      return {
+        ...state,
+        paymentMethod: action.payload,
+      }
+    },
   },
 })
 
 export const {
   cartAddItem,
   cartRemoveItem,
-  //   cartSaveShippingAddress,
-  //   cartSavePaymentMethod,
+  cartSaveShippingAddress,
+  cartSavePaymentMethod,
 } = cartSlice.actions
 
 export default cartSlice.reducer
