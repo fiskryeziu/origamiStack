@@ -7,7 +7,8 @@ import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
 import { getOrderDetails } from '../reducers/orderDetailsSlice'
-import axios from 'axios'
+import moment from 'moment'
+import { orderPayReset, payOrder } from '../reducers/orderPaySlice'
 
 const OrderScreen = () => {
   const params = useParams()
@@ -17,17 +18,31 @@ const OrderScreen = () => {
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
 
+  const orderPay = useSelector((state) => state.orderPay)
+  const { loading: loadingPay, success: successPay } = orderPay
+
+  //getting env file with routes from node
   // const getPayPalClientId = async () => {
   //   const { data: clientId } = await axios.get('/config/paypal')
 
   //   return clientId
   // }
 
-  console.log(process.env.REACT_APP_PAYPAL_CLIENT_ID)
-
   useEffect(() => {
-    dispatch(getOrderDetails(orderId))
-  }, [dispatch, orderId])
+    if (!order || successPay) {
+      dispatch(orderPayReset())
+      dispatch(getOrderDetails(orderId))
+    }
+  }, [dispatch, orderId, successPay, order])
+
+  const successPaymentHandler = (paymentResult) => {
+    const dataOrder = {
+      orderId,
+      paymentResult,
+    }
+    dispatch(payOrder(dataOrder))
+  }
+  //date formater
   return (
     <>
       <NavBar />
@@ -61,13 +76,13 @@ const OrderScreen = () => {
                   {order.shippingAddress.country}
                 </p>
                 {order.isDelivered ? (
-                  <div className="w-1/2">
+                  <div className="w-full">
                     <Alert color="bg-green-500">
                       Pain on {order.deliveredAt}
                     </Alert>
                   </div>
                 ) : (
-                  <div className="w-1/2">
+                  <div className="w-full">
                     <Alert color="bg-red-500">Not Delivered</Alert>
                   </div>
                 )}
@@ -79,11 +94,14 @@ const OrderScreen = () => {
                   {order.paymentMethod}
                 </p>
                 {order.isPaid ? (
-                  <div className="w-1/2">
-                    <Alert color="bg-green-500">Pain on {order.paidAt}</Alert>
+                  <div className="w-full">
+                    <Alert color="bg-green-500">
+                      Pain on
+                      {moment(order.paidAt).format('MMMM Do YYYY, h:mm:ss a')}
+                    </Alert>
                   </div>
                 ) : (
-                  <div className="w-1/2">
+                  <div className="w-full">
                     <Alert color="bg-red-500">Not Paid</Alert>
                   </div>
                 )}
@@ -143,6 +161,32 @@ const OrderScreen = () => {
                 </div>
               </div>
               {/* paypal button here */}
+              {!order.isPaid && (
+                <div>
+                  {loadingPay && <Spinner />}
+                  <PayPalScriptProvider
+                    options={{
+                      'client-id': `${process.env.REACT_APP_PAYPAL_CLIENT_ID}`,
+                      currency: 'EUR',
+                    }}
+                  >
+                    <PayPalButtons
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: order.totalPrice,
+                              },
+                            },
+                          ],
+                        })
+                      }}
+                      onApprove={successPaymentHandler}
+                    />
+                  </PayPalScriptProvider>
+                </div>
+              )}
               {/* <button
               className="bg-gray-900 text-white mx-2 my-auto p-2 text-[14px]"
               type="button"

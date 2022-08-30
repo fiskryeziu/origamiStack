@@ -20,7 +20,7 @@ export const payOrder = createAsyncThunk(
         },
       }
       const { data } = await axios.put(
-        `orders/${orderId}/pay`,
+        `/orders/${orderId}/pay`,
         paymentResult,
         config
       )
