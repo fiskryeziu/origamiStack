@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Alert from '../components/Alert'
@@ -6,6 +7,7 @@ import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
 import { getOrderDetails } from '../reducers/orderDetailsSlice'
+import axios from 'axios'
 
 const OrderScreen = () => {
   const params = useParams()
@@ -15,10 +17,17 @@ const OrderScreen = () => {
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
 
+  // const getPayPalClientId = async () => {
+  //   const { data: clientId } = await axios.get('/config/paypal')
+
+  //   return clientId
+  // }
+
+  console.log(process.env.REACT_APP_PAYPAL_CLIENT_ID)
+
   useEffect(() => {
     dispatch(getOrderDetails(orderId))
   }, [dispatch, orderId])
-
   return (
     <>
       <NavBar />
@@ -113,7 +122,7 @@ const OrderScreen = () => {
                 </>
               )}
             </div>
-            <div className="w-full my-10 flex flex-col border md:w-1/4 md:my-0 ">
+            <div className="w-full my-10 flex flex-col md:w-1/4 md:my-0 ">
               <div className="w-full border-b-2">
                 <h1 className="text-2xl p-2 text-gray-700">ORDER SUMMARY</h1>
                 <div className="flex justify-between m-2 border-t-2 p-2">
@@ -133,6 +142,7 @@ const OrderScreen = () => {
                   <p>{order.totalPrice}€</p>
                 </div>
               </div>
+              {/* paypal button here */}
               {/* <button
               className="bg-gray-900 text-white mx-2 my-auto p-2 text-[14px]"
               type="button"

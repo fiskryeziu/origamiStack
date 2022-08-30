@@ -1,5 +1,4 @@
 import express from 'express'
-import products from './data/product.js'
 import connectDB from './config/db.js'
 import { config } from 'dotenv'
 import productRoutes from './routes/productRoutes.js'
@@ -9,7 +8,6 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 config()
 
-//models now.
 connectDB()
 
 const app = express()
@@ -25,6 +23,8 @@ app.use('/products', productRoutes)
 app.use('/users', userRoutes)
 
 app.use('/orders', orderRoutes)
+
+app.get('/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
 
 app.use(notFound)
 
