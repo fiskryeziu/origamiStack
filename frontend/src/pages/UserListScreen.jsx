@@ -1,4 +1,3 @@
-import moment from 'moment'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
@@ -38,18 +37,19 @@ const UserListScreen = () => {
     }
   }
 
+  console.log(userInfo)
   return (
     <>
       <NavBar />
       <div className="flex flex-col h-screen">
-        <h1 className="text-3xl text-gray-600 m-2 text-center">My Orders</h1>
+        <h1 className="text-3xl text-gray-600 m-2 text-center">Users</h1>
         {loading ? (
           <Spinner />
         ) : error ? (
           <Alert color="bg-red-500">{error}</Alert>
         ) : (
-          <div className="relative">
-            <table className="w-full text-sm text-left text-gray-500">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left text-gray-500 ">
               <thead className="text-xs text-gray-700 uppercase bg-gray-200">
                 <tr>
                   <th scope="col" className="py-3 px-6">
@@ -91,12 +91,14 @@ const UserListScreen = () => {
                       </Link>
                     </td>
                     <td>
-                      <button
-                        className="btn-active px-5 py-2 rounded text-white"
-                        onClick={() => deleteHandler(user._id)}
-                      >
-                        Delete
-                      </button>
+                      {!(user._id === userInfo._id) && (
+                        <button
+                          className="btn-active px-5 py-2 rounded text-white"
+                          onClick={() => deleteHandler(user._id)}
+                        >
+                          Delete
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}

@@ -10,6 +10,8 @@ import MyOrdersScreen from './pages/MyOrdersScreen'
 import OrderScreen from './pages/OrderScreen'
 import PaymentScreen from './pages/PaymentScreen'
 import PlaceOrderScreen from './pages/PlaceOrderScreen'
+import ProductEditScreen from './pages/ProductEditScreen'
+import ProductListScreen from './pages/ProductListScreen'
 import ProductScreen from './pages/ProductScreen'
 import RegisterScreen from './pages/RegisterScreen'
 import ShippingScreen from './pages/ShippingScreen'
@@ -43,6 +45,8 @@ const App = () => {
 
         <Route path="admin/userList" element={<UserListScreen />} />
         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
+        <Route path="/admin/products" element={<ProductListScreen />} />
+        <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
       </Routes>
     </Router>
   )

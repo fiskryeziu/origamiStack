@@ -12,11 +12,21 @@ import orderMyListReducer from '../reducers/orderMyListSlice'
 import userListReducer from '../reducers/userListSlice'
 import userDeleteReducer from '../reducers/userDeleteSlice'
 import userUpdateReducer from '../reducers/userUpdateSlice'
+import productDeleteReducer from '../reducers/productDeleteSlice'
+import productReviewCreateReducer from '../reducers/productReviewCreateSlice'
+import productTopRatedReducer from '../reducers/productTopRatedSlice'
+import productCreateReducer from '../reducers/productCreateSlice'
+import productUpdateReducer from '../reducers/productUpdateSlice'
 
 const store = configureStore({
   reducer: {
     productList: productReducer,
     productListDetails: productDetailsReducer,
+    productDelete: productDeleteReducer,
+    productCreate: productCreateReducer,
+    productUpdate: productUpdateReducer,
+    productReviewCreate: productReviewCreateReducer,
+    productTopRated: productTopRatedReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userDetails: userDetailsReducer,

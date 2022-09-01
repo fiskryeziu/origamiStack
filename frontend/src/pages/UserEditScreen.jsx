@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Alert from '../components/Alert'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
@@ -74,6 +74,7 @@ const UserEditScreen = () => {
       })
     )
   }
+
   return (
     <>
       <NavBar />
@@ -82,6 +83,12 @@ const UserEditScreen = () => {
           <h1 className="text-3xl text-gray-800">User Update</h1>
           {error && <Alert color="bg-red-500">{error}</Alert>}
           {loading && <Spinner />}
+          <Link
+            to="/admin/userList"
+            className="absolute top-2 left-2 underline"
+          >
+            Go Back
+          </Link>
           <form className="w-full max-w-sm" onSubmit={submitHandler}>
             <div className="mb-6">
               <label

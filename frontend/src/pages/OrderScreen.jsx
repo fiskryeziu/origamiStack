@@ -9,6 +9,7 @@ import Spinner from '../components/Spinner'
 import { getOrderDetails } from '../reducers/orderDetailsSlice'
 import moment from 'moment'
 import { orderPayReset, payOrder } from '../reducers/orderPaySlice'
+import { Button } from 'react-daisyui'
 
 const OrderScreen = () => {
   const params = useParams()
@@ -42,7 +43,7 @@ const OrderScreen = () => {
     }
     dispatch(payOrder(dataOrder))
   }
-  //date formater
+  console.log(order)
   return (
     <>
       <NavBar />
@@ -96,7 +97,7 @@ const OrderScreen = () => {
                 {order.isPaid ? (
                   <div className="w-full">
                     <Alert color="bg-green-500">
-                      Pain on
+                      Pain on:{' '}
                       {moment(order.paidAt).format('MMMM Do YYYY, h:mm:ss a')}
                     </Alert>
                   </div>
@@ -164,27 +165,37 @@ const OrderScreen = () => {
               {!order.isPaid && (
                 <div>
                   {loadingPay && <Spinner />}
-                  <PayPalScriptProvider
-                    options={{
-                      'client-id': `${process.env.REACT_APP_PAYPAL_CLIENT_ID}`,
-                      currency: 'EUR',
-                    }}
-                  >
-                    <PayPalButtons
-                      createOrder={(data, actions) => {
-                        return actions.order.create({
-                          purchase_units: [
-                            {
-                              amount: {
-                                value: order.totalPrice,
-                              },
-                            },
-                          ],
-                        })
+                  {order.paymentMethod === 'withCash' ? (
+                    <button
+                      type="submit"
+                      className="btn my-2 w-full"
+                      onClick={() => successPaymentHandler()}
+                    >
+                      Place Order
+                    </button>
+                  ) : (
+                    <PayPalScriptProvider
+                      options={{
+                        'client-id': `${process.env.REACT_APP_PAYPAL_CLIENT_ID}`,
+                        currency: 'EUR',
                       }}
-                      onApprove={successPaymentHandler}
-                    />
-                  </PayPalScriptProvider>
+                    >
+                      <PayPalButtons
+                        createOrder={(data, actions) => {
+                          return actions.order.create({
+                            purchase_units: [
+                              {
+                                amount: {
+                                  value: order.totalPrice,
+                                },
+                              },
+                            ],
+                          })
+                        }}
+                        onApprove={successPaymentHandler}
+                      />
+                    </PayPalScriptProvider>
+                  )}
                 </div>
               )}
               {/* <button

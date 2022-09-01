@@ -50,6 +50,29 @@ const PaymentScreen = () => {
                 <label>PayPal</label>
               </div>
             </div>
+            {shippingAddress &&
+              (shippingAddress.country.toLowerCase() === 'kosovo' ||
+                shippingAddress.country.toLowerCase() === 'kosova') && (
+                <div className="mb-6">
+                  <label
+                    htmlFor="paymentMethod"
+                    className="block text-sm font-semibold leading-6 text-gray-900"
+                  >
+                    Payment Method
+                  </label>
+                  <div className="flex space-x-3">
+                    <input
+                      type="radio"
+                      id="withCash"
+                      name="paymentMethod"
+                      value="withCash"
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                    <label>With Cash</label>
+                  </div>
+                </div>
+              )}
+
             <button
               type="submit"
               className="inline-flex justify-center  rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-20"
