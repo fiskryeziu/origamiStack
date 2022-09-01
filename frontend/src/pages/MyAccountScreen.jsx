@@ -44,7 +44,7 @@ const MyAccountScreen = () => {
               <>
                 <div className="bg-gray-200 w-full md:w-60 h-40 flex justify-center items-center rounded-t-lg">
                   <Link
-                    to="/admin/users"
+                    to="/admin/userList"
                     className="flex flex-col items-center"
                   >
                     <i className="fa fa-shopping-cart text-gray-700 text-7xl" />

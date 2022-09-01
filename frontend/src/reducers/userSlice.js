@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { orderMyListReset } from './orderMyListSlice'
 import { userDetailsReset } from './userDetailsSlice'
+import { userListReset } from './userListSlice'
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
@@ -67,6 +69,8 @@ export const logout = () => (dispatch, getState) => {
   localStorage.removeItem('userInfo')
   dispatch(userLogout())
   dispatch(userDetailsReset())
+  dispatch(orderMyListReset())
+  dispatch(userListReset())
 }
 const userSlice = createSlice({
   name: 'userLogin',

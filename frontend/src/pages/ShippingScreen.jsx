@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { saveShippingAdress } from '../reducers/cartSlice'
-import CheckoutSteps from './CheckoutSteps'
+import CheckoutSteps from '../components/CheckoutSteps'
 
 const ShippingScreen = () => {
   const cart = useSelector((state) => state.cart)

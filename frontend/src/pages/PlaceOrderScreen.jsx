@@ -5,7 +5,7 @@ import Alert from '../components/Alert'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { createOrder } from '../reducers/orderSlice'
-import CheckoutSteps from './CheckoutSteps'
+import CheckoutSteps from '../components/CheckoutSteps'
 
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch()

@@ -6,6 +6,7 @@ import ContactScreen from './pages/ContactScreen'
 import HomeScreen from './pages/HomeScreen'
 import LoginScreen from './pages/LoginScreen'
 import MyAccountScreen from './pages/MyAccountScreen'
+import MyOrdersScreen from './pages/MyOrdersScreen'
 import OrderScreen from './pages/OrderScreen'
 import PaymentScreen from './pages/PaymentScreen'
 import PlaceOrderScreen from './pages/PlaceOrderScreen'
@@ -13,6 +14,8 @@ import ProductScreen from './pages/ProductScreen'
 import RegisterScreen from './pages/RegisterScreen'
 import ShippingScreen from './pages/ShippingScreen'
 import SingleProduct from './pages/SingleProduct'
+import UserEditScreen from './pages/UserEditScreen'
+import UserListScreen from './pages/UserListScreen'
 import UserProfileScreen from './pages/UserProfileScreen'
 
 const App = () => {
@@ -36,6 +39,10 @@ const App = () => {
         <Route path="/place-order" element={<PlaceOrderScreen />} />
         <Route path="/order/:id" element={<OrderScreen />} />
         <Route path="/product-details/:id" element={<SingleProduct />} />
+        <Route path="/my-orders" element={<MyOrdersScreen />} />
+
+        <Route path="admin/userList" element={<UserListScreen />} />
+        <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
       </Routes>
     </Router>
   )
