@@ -62,7 +62,6 @@ const UserEditScreen = () => {
       }))
     }
   }
-  console.log(isAdmin)
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(

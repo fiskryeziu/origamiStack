@@ -88,7 +88,6 @@ const cartSlice = createSlice({
       }
     },
     cartSavePaymentMethod(state, action) {
-      console.log(action)
       return {
         ...state,
         paymentMethod: action.payload,

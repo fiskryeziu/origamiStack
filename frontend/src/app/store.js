@@ -17,6 +17,8 @@ import productReviewCreateReducer from '../reducers/productReviewCreateSlice'
 import productTopRatedReducer from '../reducers/productTopRatedSlice'
 import productCreateReducer from '../reducers/productCreateSlice'
 import productUpdateReducer from '../reducers/productUpdateSlice'
+import orderListReducer from '../reducers/orderListSlice'
+import orderDeliverReducer from '../reducers/orderDeliverSlice'
 
 const store = configureStore({
   reducer: {
@@ -38,6 +40,8 @@ const store = configureStore({
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
     orderMyList: orderMyListReducer,
+    orderList: orderListReducer,
+    orderDeliver: orderDeliverReducer,
   },
 })
 

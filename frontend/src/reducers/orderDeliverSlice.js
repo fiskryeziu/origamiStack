@@ -3,11 +3,10 @@ import axios from 'axios'
 
 const initialState = {}
 
-export const createReview = createAsyncThunk(
-  'reviewCreate/createReview',
-  async (productData, { getState, rejectWithValue }) => {
+export const deliverOrder = createAsyncThunk(
+  'orderDeliver/deliverOrder',
+  async (order, { getState, rejectWithValue }) => {
     try {
-      const { productId, ratingData } = productData
       const {
         userLogin: { userInfo },
       } = getState()
@@ -18,9 +17,9 @@ export const createReview = createAsyncThunk(
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
-      const { data } = await axios.post(
-        `/products/${productId}/reviews`,
-        ratingData,
+      const { data } = await axios.put(
+        `/orders/${order._id}/deliver`,
+        {},
         config
       )
       return data
@@ -31,24 +30,24 @@ export const createReview = createAsyncThunk(
     }
   }
 )
-const productReviewCreateSlice = createSlice({
-  name: 'reviewCreate',
+const deliverOrderSlice = createSlice({
+  name: 'orderdeliver',
   initialState,
   reducers: {
-    productCreateReviewReset(state, action) {
+    orderDeliverReset(state, action) {
       return {}
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(createReview.pending, (state) => {
+      .addCase(deliverOrder.pending, (state) => {
         state.loading = true
       })
-      .addCase(createReview.fulfilled, (state, action) => {
+      .addCase(deliverOrder.fulfilled, (state, action) => {
         state.loading = false
         state.success = true
       })
-      .addCase(createReview.rejected, (state, action) => {
+      .addCase(deliverOrder.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload.message
       })
@@ -56,6 +55,6 @@ const productReviewCreateSlice = createSlice({
 })
 
 // show user navbar and logout
-export const { productCreateReviewReset } = productReviewCreateSlice.actions
+export const { orderDeliverReset } = deliverOrderSlice.actions
 
-export default productReviewCreateSlice.reducer
+export default deliverOrderSlice.reducer

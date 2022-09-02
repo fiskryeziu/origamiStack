@@ -21,7 +21,6 @@ const MyAccountScreen = () => {
   const signOutHandler = () => {
     dispatch(logout())
     navigate('/')
-    console.log('sign out')
   }
   return (
     <>

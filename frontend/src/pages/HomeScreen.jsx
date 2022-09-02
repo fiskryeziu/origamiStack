@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Card from '../components/Card'
 import section from '../assets/images/section.jpg'
 import Carousel from '../components/Carousel'
@@ -12,14 +12,19 @@ import Alert from '../components/Alert'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
+  const params = useParams()
+  const pageNumber = params.pageNumber || 1
 
   const productList = useSelector((state) => state.productList)
 
   const { loading, error, products } = productList
 
   useEffect(() => {
-    dispatch(fetchProducts())
-  }, [dispatch])
+    const obj = {
+      pageNumber,
+    }
+    dispatch(fetchProducts(obj))
+  }, [dispatch, pageNumber])
 
   return (
     <>
@@ -65,7 +70,7 @@ const HomeScreen = () => {
               </div>
               <div className="flex flex-row justify-center items-center flex-wrap">
                 {error ? (
-                  <Alert color="red">{error}</Alert>
+                  <Alert color="bg-red-500">{error}</Alert>
                 ) : (
                   <>
                     {products.map((product) => (

@@ -6,10 +6,20 @@ import Product from '../models/productModel.js'
 //route /products
 //access public
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({}).sort({ createdAt: '-1' })
-  // .limit(6)
+  const pageSize = 6
+  const page = Number(req.query.pageNumber) || 1
 
-  res.json(products)
+  const rangeValue = Number(req.query.rangeValue) || 0
+
+  const count = await Product.count()
+  const products = await Product.find({})
+    .sort({ createdAt: -1 })
+    .limit(pageSize)
+    .skip((page - 1) * pageSize)
+    .where('price')
+    .gte(rangeValue)
+
+  res.json({ products, page, pages: Math.ceil(count / pageSize) })
 })
 
 //fetch productbyId

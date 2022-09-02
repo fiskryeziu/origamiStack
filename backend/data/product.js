@@ -54,17 +54,6 @@ const products = [
     rating: 4.5,
     numReviews: 12,
   },
-  {
-    name: 'Origami Vase (random)',
-    image: '/images/origami2.jpg',
-    description: 'Origami vase made from paper ',
-    brand: 'paper',
-    category: 'handmade',
-    price: 59,
-    countInStock: 1,
-    rating: 4.5,
-    numReviews: 12,
-  },
-];
+]
 
-export default products;
+export default products

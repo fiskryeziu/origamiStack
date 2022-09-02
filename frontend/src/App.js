@@ -1,12 +1,12 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import AboutScreen from './pages/AboutScreen'
 import CartScreen from './pages/CartScreen'
 import ContactScreen from './pages/ContactScreen'
 import HomeScreen from './pages/HomeScreen'
 import LoginScreen from './pages/LoginScreen'
 import MyAccountScreen from './pages/MyAccountScreen'
 import MyOrdersScreen from './pages/MyOrdersScreen'
+import OrderListScreen from './pages/OrderListScreen'
 import OrderScreen from './pages/OrderScreen'
 import PaymentScreen from './pages/PaymentScreen'
 import PlaceOrderScreen from './pages/PlaceOrderScreen'
@@ -26,7 +26,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/products" element={<ProductScreen />} />
-        <Route path="/about" element={<AboutScreen />} />
+        <Route path="/products/page/:pageNumber" element={<ProductScreen />} />
+        <Route
+          path="/products/page/:pageNumber/:rangeValue"
+          element={<ProductScreen />}
+        />
+        <Route path="/products/:rangeValue" element={<ProductScreen />} />
         <Route path="/contact" element={<ContactScreen />} />
         <Route path="/my-account" element={<MyAccountScreen />} />
         <Route path="/sign-in" element={<LoginScreen />} />
@@ -46,7 +51,13 @@ const App = () => {
         <Route path="admin/userList" element={<UserListScreen />} />
         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
         <Route path="/admin/products" element={<ProductListScreen />} />
+        <Route
+          path="/admin/products/:pageNumber"
+          element={<ProductListScreen />}
+        />
         <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
+
+        <Route path="/admin/orders" element={<OrderListScreen />} />
       </Routes>
     </Router>
   )

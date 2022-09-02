@@ -9,8 +9,12 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async () => {
-    const { data } = await axios.get('/products')
+  async (obj) => {
+    const { pageNumber = '', rangeValue = '' } = obj
+
+    const { data } = await axios.get(
+      `/products?pageNumber=${pageNumber}&rangeValue=${rangeValue}`
+    )
     return data
   }
 )
@@ -25,7 +29,9 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.loading = false
-        state.products = action.payload
+        state.products = action.payload.products
+        state.pages = action.payload.pages
+        state.page = action.payload.page
         state.error = ''
       })
       .addCase(fetchProducts.rejected, (state, action) => {

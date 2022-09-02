@@ -6,41 +6,44 @@ import Alert from '../components/Alert'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
-import { listMyOrder } from '../reducers/orderMyListSlice'
+import { listOrders } from '../reducers/orderListSlice'
 
-const MyOrdersScreen = () => {
+const OrderListScreen = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  const orderList = useSelector((state) => state.orderList)
+  const { loading, error, orders } = orderList
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const orderMyList = useSelector((state) => state.orderMyList)
-  const { loading, error, orders } = orderMyList
-
   useEffect(() => {
-    if (!userInfo) {
-      navigate('/sign-in')
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listOrders())
     } else {
-      dispatch(listMyOrder())
+      navigate('/login')
     }
-  }, [userInfo, dispatch, navigate])
+  }, [dispatch, navigate, userInfo])
   return (
     <>
       <NavBar />
       <div className="flex flex-col h-auto md:h-screen">
-        <h1 className="text-3xl text-gray-600 m-2 text-center">My Orders</h1>
+        <h1 className="text-3xl text-gray-600 m-2 text-center">Orders</h1>
         {loading ? (
           <Spinner />
         ) : error ? (
           <Alert color="bg-red-500">{error}</Alert>
         ) : (
-          <div className="overflow-x-auto relative">
-            <table className="w-full text-sm text-left text-gray-500">
+          <div className="overflow-x-auto my-10">
+            <table className="w-full text-sm text-left text-gray-500 ">
               <thead className="text-xs text-gray-700 uppercase bg-gray-200">
                 <tr>
                   <th scope="col" className="py-3 px-6">
                     ID
+                  </th>
+                  <th scope="col" className="py-3 px-6">
+                    USER
                   </th>
                   <th scope="col" className="py-3 px-6">
                     DATE
@@ -62,9 +65,13 @@ const MyOrdersScreen = () => {
                   <tr key={order._id} className="bg-white border-b ">
                     <td className="py-4 px-6">{order._id}</td>
                     <td className="py-4 px-6">
+                      {order.user && order.user.name}
+                    </td>
+                    <td className="py-4 px-6">
                       {moment(order.createdAt).format('L')}
                     </td>
                     <td className="py-4 px-6">{order.totalPrice}€</td>
+
                     <td className="py-4 px-6">
                       {order.isPaid ? (
                         <>{moment(order.paidAt).format('L')}</>
@@ -76,7 +83,7 @@ const MyOrdersScreen = () => {
                       {order.isDelivered ? (
                         <>{moment(order.deliveredAt).format('L')}</>
                       ) : (
-                        <i className="fas fa-times text-red-600"></i>
+                        <i className="fas fa-times" color="red"></i>
                       )}
                     </td>
                     <td>
@@ -98,4 +105,4 @@ const MyOrdersScreen = () => {
   )
 }
 
-export default MyOrdersScreen
+export default OrderListScreen

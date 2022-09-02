@@ -30,18 +30,16 @@ const UserListScreen = () => {
   }, [userInfo, dispatch, navigate, success])
 
   const deleteHandler = (id) => {
-    console.log('delete')
     //dispatch delete
     if (window.confirm('Are you sure')) {
       dispatch(deleteUser(id))
     }
   }
 
-  console.log(userInfo)
   return (
     <>
       <NavBar />
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col h-auto md:h-screen">
         <h1 className="text-3xl text-gray-600 m-2 text-center">Users</h1>
         {loading ? (
           <Spinner />

@@ -32,7 +32,6 @@ const LoginScreen = () => {
       ...prev,
       [e.target.id]: e.target.value,
     }))
-    console.log(formData)
   }
 
   const submitHandler = (e) => {

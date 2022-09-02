@@ -10,9 +10,11 @@ import { getOrderDetails } from '../reducers/orderDetailsSlice'
 import moment from 'moment'
 import { orderPayReset, payOrder } from '../reducers/orderPaySlice'
 import { Button } from 'react-daisyui'
+import { deliverOrder, orderDeliverReset } from '../reducers/orderDeliverSlice'
 
 const OrderScreen = () => {
   const params = useParams()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const orderId = params.id
 
@@ -22,6 +24,12 @@ const OrderScreen = () => {
   const orderPay = useSelector((state) => state.orderPay)
   const { loading: loadingPay, success: successPay } = orderPay
 
+  const orderDeliver = useSelector((state) => state.orderDeliver)
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   //getting env file with routes from node
   // const getPayPalClientId = async () => {
   //   const { data: clientId } = await axios.get('/config/paypal')
@@ -30,11 +38,16 @@ const OrderScreen = () => {
   // }
 
   useEffect(() => {
-    if (!order || successPay) {
+    if (!userInfo) {
+      navigate('/sign-in')
+    }
+
+    if (!order || successPay || order._id !== orderId || successDeliver) {
       dispatch(orderPayReset())
+      dispatch(orderDeliverReset())
       dispatch(getOrderDetails(orderId))
     }
-  }, [dispatch, orderId, successPay, order])
+  }, [dispatch, orderId, successPay, order, successDeliver, navigate, userInfo])
 
   const successPaymentHandler = (paymentResult) => {
     const dataOrder = {
@@ -43,7 +56,9 @@ const OrderScreen = () => {
     }
     dispatch(payOrder(dataOrder))
   }
-  console.log(order)
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order))
+  }
   return (
     <>
       <NavBar />
@@ -79,7 +94,10 @@ const OrderScreen = () => {
                 {order.isDelivered ? (
                   <div className="w-full">
                     <Alert color="bg-green-500">
-                      Pain on {order.deliveredAt}
+                      Paid on{' '}
+                      {moment(order.deliveredAt).format(
+                        'MMMM Do YYYY, h:mm:ss a'
+                      )}
                     </Alert>
                   </div>
                 ) : (
@@ -162,7 +180,7 @@ const OrderScreen = () => {
                 </div>
               </div>
               {/* paypal button here */}
-              {!order.isPaid && (
+              {userInfo && !userInfo.isAdmin && !order.isPaid && (
                 <div>
                   {loadingPay && <Spinner />}
                   {order.paymentMethod === 'withCash' ? (
@@ -198,14 +216,19 @@ const OrderScreen = () => {
                   )}
                 </div>
               )}
-              {/* <button
-              className="bg-gray-900 text-white mx-2 my-auto p-2 text-[14px]"
-              type="button"
-              disabled={cart.cartItems.length === 0}
-              onClick={placeOrderHandler}
-            >
-              PLACE ORDER
-            </button> */}
+              {loadingDeliver && <Spinner />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <button
+                    className="bg-gray-900 text-white mx-2 my-auto p-2 text-[14px]"
+                    type="button"
+                    onClick={deliverHandler}
+                  >
+                    Mark as Delivered
+                  </button>
+                )}
             </div>
           </div>
           <Footer />

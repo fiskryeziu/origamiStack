@@ -119,7 +119,6 @@ const ProductEditScreen = () => {
       }))
       setUploading(false)
     } catch (error) {
-      console.log(error)
       setUploading(false)
     }
   }

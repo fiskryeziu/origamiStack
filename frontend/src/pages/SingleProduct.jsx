@@ -1,29 +1,62 @@
 import React, { useEffect, useState } from 'react'
+import moment from 'moment'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Alert from '../components/Alert'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Rating from '../components/Rating'
 import Spinner from '../components/Spinner'
 import { fetchProductsDetails } from '../reducers/productDetailsSlice'
+import {
+  createReview,
+  productCreateReviewReset,
+} from '../reducers/productReviewCreateSlice'
 
 const SingleProduct = () => {
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState('')
   const [qty, setQty] = useState(1)
   const params = useParams()
   const navigate = useNavigate()
   const productId = params.id
   const dispatch = useDispatch()
-  const productListDetails = useSelector((state) => state.productListDetails)
 
+  const productListDetails = useSelector((state) => state.productListDetails)
   const { error, loading, product } = productListDetails
 
+  const productReviewCreate = useSelector((state) => state.productReviewCreate)
+  const { error: errorProductReview, success: successProductReview } =
+    productReviewCreate
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
+    if (successProductReview) {
+      alert('Review Submitted')
+      setRating(0)
+      setComment('')
+      dispatch(productCreateReviewReset())
+    }
     dispatch(fetchProductsDetails(productId))
-  }, [productId, dispatch])
+  }, [productId, dispatch, successProductReview])
 
   const addToCartHandler = () => {
     navigate(`/cart/${productId}/?qty=${qty}`)
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+    const ratingData = {
+      rating,
+      comment,
+    }
+    const productData = {
+      productId,
+      ratingData,
+    }
+    dispatch(createReview(productData))
   }
   return (
     <>
@@ -96,34 +129,62 @@ const SingleProduct = () => {
           {/* review  */}
           <div className="flex flex-col max-w-sm mx-10 md:mx-40 mb-10">
             <h1 className="text-4xl text-gray-700 pb-4">Reviews </h1>
-            <div className="border-2 p-5">
-              <p>John Doe</p>
-              <Rating />
-              <p>2022-07-27</p>
-              <p className="mt-5">great product</p>
-            </div>
+            {product.reviews.length === 0 && (
+              <Alert color="bg-red-500">No Reviews</Alert>
+            )}
+            {product.reviews.map((review) => (
+              <>
+                <div className="border-2 p-5">
+                  <p>{review.name}</p>
+                  <Rating value={review.rating} />
+                  <p>{moment(review.createdAt).format('L')}</p>
+                  <p className="mt-5">{review.comment}</p>
+                </div>
+              </>
+            ))}
             <div className="border-x-2 p-5">
               <h1 className="text-3xl text-gray-700">
                 Write a customer Review
               </h1>
-              <p>Rating</p>
-              <form action="">
-                <select name="" id="" className="w-full border-2">
-                  <option defaultValue=""></option>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                </select>
-                <p>Comment</p>
-                <textarea name="" id="" className="w-full border-2"></textarea>
-                <div>
-                  <button className="w-full bg-gray-900 p-2 text-white hover:brightness-125">
-                    Submit
-                  </button>
-                </div>
-              </form>
+              {errorProductReview && (
+                <Alert color="bg-red-500">{errorProductReview}</Alert>
+              )}
+              {userInfo ? (
+                <form onSubmit={submitHandler}>
+                  <label>Rating</label>
+                  <select
+                    className="w-full border-2"
+                    value={rating}
+                    onChange={(e) => setRating(e.target.value)}
+                  >
+                    <option value="">Select ...</option>
+                    <option value="1">1 - Poor </option>
+                    <option value="2">2 - Fair</option>
+                    <option value="3">3 - Good</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="5">5 - Excellent</option>
+                  </select>
+                  <p>Comment</p>
+                  <textarea
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    className="w-full border-2"
+                  ></textarea>
+                  <div>
+                    <button className="w-full bg-gray-900 p-2 text-white hover:brightness-125">
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <Alert color="bg-blue-500">
+                  Please{' '}
+                  <Link to="/sign-in" className="underline">
+                    sign in
+                  </Link>{' '}
+                  to write a review
+                </Alert>
+              )}
             </div>
           </div>
         </>
