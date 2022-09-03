@@ -7,6 +7,7 @@ import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+import nodemailer from 'nodemailer'
 
 config()
 
@@ -14,6 +15,26 @@ connectDB()
 
 const app = express()
 
+// nodemialer  start
+let mailTransporter = {
+  service: 'gmail',
+  auth: {
+    user: 'fisnik.crz7@gmail.com',
+    pass: 'vlatajorkvgslmir',
+  },
+}
+
+let transporter = nodemailer.createTransport(mailTransporter)
+
+transporter.verify((error, success) => {
+  if (error) {
+    console.log(error)
+  } else {
+    console.log('All works fine, congratz!')
+  }
+})
+
+// nodemailer end
 app.use(express.json())
 
 app.get('/', (req, res) => {
@@ -32,6 +53,31 @@ const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 // app.get('/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
+
+app.post('/send', (req, res, next) => {
+  const name = req.body.name
+  const email = req.body.email
+  const message = req.body.messageHtml
+
+  var mail = {
+    from: name,
+    to: email,
+    subject: 'Contact form request',
+    html: message,
+  }
+
+  transporter.sendMail(mail, (err, data) => {
+    if (err) {
+      res.json({
+        msg: 'fail',
+      })
+    } else {
+      res.json({
+        msg: 'success',
+      })
+    }
+  })
+})
 
 app.use(notFound)
 

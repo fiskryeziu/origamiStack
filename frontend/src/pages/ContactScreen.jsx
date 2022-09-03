@@ -1,10 +1,12 @@
-import React from 'react';
-import Footer from '../components/Footer';
-import NavBar from '../components/NavBar';
+import React from 'react'
+import CustomTitle from '../components/CustomTitle'
+import Footer from '../components/Footer'
+import NavBar from '../components/NavBar'
 
 const ContactScreen = () => {
   return (
     <>
+      <CustomTitle title="Origami-Handmade | Contact" />
       <NavBar />
       <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[60vh] relative bg-contact bg-cover bg-bottom bg-no-repeat">
         <div className="z-10 flex items-center h-[200px]">
@@ -85,7 +87,7 @@ const ContactScreen = () => {
       </div>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default ContactScreen;
+export default ContactScreen

@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { saveShippingAdress } from '../reducers/cartSlice'
 import CheckoutSteps from '../components/CheckoutSteps'
+import CustomTitle from '../components/CustomTitle'
 
 const ShippingScreen = () => {
   const cart = useSelector((state) => state.cart)
@@ -38,6 +39,7 @@ const ShippingScreen = () => {
 
   return (
     <>
+      <CustomTitle title="Origami-Handmade | Shipping" />
       <NavBar />
       <div className="flex flex-col h-screen">
         <div className="relative flex flex-1 flex-col items-center justify-center pt-12 pb-16 mx-2">

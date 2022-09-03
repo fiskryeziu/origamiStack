@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { createOrder } from '../reducers/orderSlice'
 import CheckoutSteps from '../components/CheckoutSteps'
+import CustomTitle from '../components/CustomTitle'
 
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch()
@@ -58,6 +59,8 @@ const PlaceOrderScreen = () => {
 
   return (
     <>
+      <CustomTitle title="Origami-Handmade | PlaceOrder" />
+
       <NavBar />
       <div className="flex flex-col h-screen">
         <div className="relative flex flex-1 flex-col items-center justify-center my-2">

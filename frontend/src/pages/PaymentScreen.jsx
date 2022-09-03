@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { savePaymentMethod } from '../reducers/cartSlice'
 import CheckoutSteps from '../components/CheckoutSteps'
+import CustomTitle from '../components/CustomTitle'
 const PaymentScreen = () => {
   const cart = useSelector((state) => state.cart)
   const { shippingAddress } = cart
@@ -24,6 +25,8 @@ const PaymentScreen = () => {
   }
   return (
     <>
+      <CustomTitle title="Origami-Handmade | Payment" />
+
       <NavBar />
       <div className="flex flex-col h-screen">
         <div className="relative flex flex-1 flex-col items-center justify-center pt-12 pb-16 mx-2">

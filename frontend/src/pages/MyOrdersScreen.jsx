@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import Alert from '../components/Alert'
+import CustomTitle from '../components/CustomTitle'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
@@ -27,6 +28,7 @@ const MyOrdersScreen = () => {
   }, [userInfo, dispatch, navigate])
   return (
     <>
+      <CustomTitle title="Origami-Handmade | MyOrders" />
       <NavBar />
       <div className="flex flex-col h-auto md:h-screen">
         <h1 className="text-3xl text-gray-600 m-2 text-center">My Orders</h1>

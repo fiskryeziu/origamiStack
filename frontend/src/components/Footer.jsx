@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import logo from "../assets/images/origamihandmade-white.png";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import logo from '../assets/images/origamihandmade-white.png'
 
 const Footer = () => {
   return (
@@ -12,7 +12,6 @@ const Footer = () => {
         <div className="flex flex-col space-x-0 space-y-6 md:flex-row md:space-y-0 md:space-x-6 text-white pt-4">
           <Link to="/">Home</Link>
           <Link to="/products">Product</Link>
-          <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>
         </div>
       </div>
@@ -20,7 +19,7 @@ const Footer = () => {
         © 2022 origamihandmade. Powered by origamihandmade.
       </p>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

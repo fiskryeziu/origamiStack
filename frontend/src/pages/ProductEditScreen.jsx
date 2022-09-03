@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Alert from '../components/Alert'
+import CustomTitle from '../components/CustomTitle'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
@@ -125,6 +126,8 @@ const ProductEditScreen = () => {
 
   return (
     <>
+      <CustomTitle title="Origami-Handmade | ProductEdit" />
+
       <NavBar />
       <div className="flex flex-col h-screen">
         <div className="relative flex flex-1 flex-col items-center justify-center pt-12 pb-16 mx-2">

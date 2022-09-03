@@ -5,6 +5,7 @@ import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { addToCart, removeFromCart } from '../reducers/cartSlice'
 import Alert from '../components/Alert'
+import CustomTitle from '../components/CustomTitle'
 
 const CartScreen = () => {
   const params = useParams()
@@ -41,6 +42,7 @@ const CartScreen = () => {
   }
   return (
     <div className="flex flex-col h-screen">
+      <CustomTitle title="Origami-Handmade | Cart" />
       <NavBar />
       <div className="flex flex-col md:flex-row my-10">
         <div className="w-full md:w-3/4 flex flex-col m-2">

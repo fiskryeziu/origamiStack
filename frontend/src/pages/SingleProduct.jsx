@@ -12,6 +12,7 @@ import {
   createReview,
   productCreateReviewReset,
 } from '../reducers/productReviewCreateSlice'
+import CustomTitle from '../components/CustomTitle'
 
 const SingleProduct = () => {
   const [rating, setRating] = useState(0)
@@ -60,6 +61,8 @@ const SingleProduct = () => {
   }
   return (
     <>
+      <CustomTitle title="Origami-Handmade | Product" />
+
       <NavBar />
       {loading ? (
         <Spinner />

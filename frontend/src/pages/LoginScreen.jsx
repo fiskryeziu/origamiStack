@@ -7,6 +7,7 @@ import { loginActions } from '../reducers/userSlice'
 import { useEffect } from 'react'
 import Spinner from '../components/Spinner'
 import Alert from '../components/Alert'
+import CustomTitle from '../components/CustomTitle'
 
 const LoginScreen = () => {
   const [formData, setFormData] = useState({
@@ -45,6 +46,7 @@ const LoginScreen = () => {
   }
   return (
     <>
+      <CustomTitle title="Origami-Handmade | Login" />
       <NavBar />
       <div className="flex flex-col h-screen">
         <div className="relative flex flex-1 flex-col items-center justify-center pt-12 pb-16 mx-2">

@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import EmailHandler from './email/EmailHandler'
 import CartScreen from './pages/CartScreen'
 import ContactScreen from './pages/ContactScreen'
 import HomeScreen from './pages/HomeScreen'
@@ -25,6 +26,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/email" element={<EmailHandler />} />
         <Route path="/products" element={<ProductScreen />} />
         <Route path="/products/page/:pageNumber" element={<ProductScreen />} />
         <Route

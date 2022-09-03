@@ -30,7 +30,6 @@ const NavBar = () => {
           <div className="space-x-10 md:flex hidden items-center">
             <Link to="/">Home</Link>
             <Link to="/products">Product</Link>
-            <Link to="/about">About</Link>
             <Link to="/contact">Contact</Link>
             <Link to="/my-account">My Account</Link>
           </div>

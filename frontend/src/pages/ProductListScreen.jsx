@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link, useParams } from 'react-router-dom'
 import Alert from '../components/Alert'
+import CustomTitle from '../components/CustomTitle'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import PaginationC from '../components/PaginationC'
@@ -76,6 +77,8 @@ const ProductListScreen = () => {
   }
   return (
     <>
+      <CustomTitle title="Origami-Handmade | ProductList" />
+
       <NavBar />
       <div className="flex flex-col ">
         <div className="flex justify-between">

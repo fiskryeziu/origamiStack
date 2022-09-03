@@ -11,6 +11,7 @@ import moment from 'moment'
 import { orderPayReset, payOrder } from '../reducers/orderPaySlice'
 import { Button } from 'react-daisyui'
 import { deliverOrder, orderDeliverReset } from '../reducers/orderDeliverSlice'
+import CustomTitle from '../components/CustomTitle'
 
 const OrderScreen = () => {
   const params = useParams()
@@ -61,6 +62,8 @@ const OrderScreen = () => {
   }
   return (
     <>
+      <CustomTitle title="Origami-Handmade | Order" />
+
       <NavBar />
       {loading ? (
         <Spinner />

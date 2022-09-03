@@ -9,6 +9,7 @@ import { fetchProducts } from '../reducers/productSlice'
 import PaginationC from '../components/PaginationC'
 import Spinner from '../components/Spinner'
 import { Alert } from 'react-daisyui'
+import CustomTitle from '../components/CustomTitle'
 
 const ProductScreen = () => {
   const [value, setValue] = useState(0)
@@ -41,6 +42,7 @@ const ProductScreen = () => {
   }
   return (
     <>
+      <CustomTitle title="Origami-Handmade | Product" />
       <NavBar />
       {/* product screen div   */}
       {loading ? (

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import { logout } from '../reducers/userSlice'
+import CustomTitle from '../components/CustomTitle'
 
 const MyAccountScreen = () => {
   const navigate = useNavigate()
@@ -26,6 +27,7 @@ const MyAccountScreen = () => {
     <>
       {userInfo && (
         <>
+          <CustomTitle title="Origami-Handmade | MyAccount" />
           <NavBar />
           <div className="flex flex-col justify-center items-center w-full h-[50vh] md:h-[60vh] relative bg-myaccount bg-cover bg-center bg-no-repeat">
             <div className="z-10 flex items-center h-[200px]">
@@ -46,7 +48,7 @@ const MyAccountScreen = () => {
                     to="/admin/userList"
                     className="flex flex-col items-center"
                   >
-                    <i className="fa fa-shopping-cart text-gray-700 text-7xl" />
+                    <i className="fa fa-users text-gray-700 text-7xl" />
                     <p className="text-2xl font-thin">Users</p>
                   </Link>
                 </div>
@@ -55,7 +57,7 @@ const MyAccountScreen = () => {
                     to="/admin/products"
                     className="flex flex-col items-center"
                   >
-                    <i className="fa fa-shopping-cart text-gray-700 text-7xl" />
+                    <i className="fa fa-table text-gray-700 text-7xl" />
                     <p className="text-2xl font-thin">Products</p>
                   </Link>
                 </div>
@@ -64,7 +66,7 @@ const MyAccountScreen = () => {
                     to="/admin/orders"
                     className="flex flex-col items-center"
                   >
-                    <i className="fa fa-shopping-cart text-gray-700 text-7xl" />
+                    <i className="fa fa-list-ol text-gray-700 text-7xl" />
                     <p className="text-2xl font-thin">Orders</p>
                   </Link>
                 </div>

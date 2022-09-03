@@ -9,6 +9,7 @@ import Carousel from '../components/Carousel'
 import { fetchProducts } from '../reducers/productSlice'
 import Spinner from '../components/Spinner'
 import Alert from '../components/Alert'
+import CustomTitle from '../components/CustomTitle'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const HomeScreen = () => {
 
   return (
     <>
+      <CustomTitle title="Origami-Handmade | Home" />
       <NavBar />
       {loading ? (
         <Spinner />
