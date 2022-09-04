@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React from 'react'
 const wrapper = {
   backgroundColor: '#f7f7f7',
@@ -35,10 +36,10 @@ const th = {
 const h3 = {
   color: '#F25C05',
 }
-const fontColor = {
-  color: '#777674',
-}
-export default function InlineLink() {
+// const fontColor = {
+//   color: '#777674',
+// }
+export default function InlineLink({ order, name }) {
   return (
     <>
       <div className="wrapper" style={wrapper}>
@@ -51,15 +52,17 @@ export default function InlineLink() {
             className="textContent"
             style={{ margin: '0 2em', color: '#777674' }}
           >
-            <p>Hi Ilir,</p>
+            <p>Hi {name},</p>
             <p>
-              Just to let you know — we've received your order #1408, and it is
-              now being processed.
+              Just to let you know — we've received your order #{order._id}, and
+              it is now being processed.
             </p>
             <p>Pay with cash upon delivery.</p>
           </div>
           <div style={{ margin: '0 2em' }}>
-            <h3 style={h3}>[Order #1408] (August 15, 2022)</h3>
+            <h3 style={h3}>
+              [Order #{order._id}] ({moment(order.paidAt).format('LL')})
+            </h3>
             <div className="productDiv">
               <table style={table}>
                 <thead>
@@ -70,16 +73,13 @@ export default function InlineLink() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td style={td}>flower</td>
-                    <td style={td}>1</td>
-                    <td style={td}>200$</td>
-                  </tr>
-                  <tr>
-                    <td style={td}>flower</td>
-                    <td style={td}>2</td>
-                    <td style={td}>400$</td>
-                  </tr>
+                  {order.orderItems.map((item) => (
+                    <tr key={item.product}>
+                      <td style={td}>{item.name}</td>
+                      <td style={td}>{item.qty}</td>
+                      <td style={td}>{item.price}€</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -87,15 +87,17 @@ export default function InlineLink() {
               <table style={table}>
                 <tr>
                   <th style={th}>Subtotal:</th>
-                  <td style={td}>600$</td>
+                  <td style={td}>
+                    {order.totalPrice - order.shippingPrice - order.taxPrice}€
+                  </td>
                 </tr>
                 <tr>
                   <th style={th}>Payment Method</th>
-                  <td style={td}>PayPal</td>
+                  <td style={td}>{order.paymentMethod}</td>
                 </tr>
                 <tr>
                   <th style={th}>Total</th>
-                  <td style={td}>600$</td>
+                  <td style={td}>{order.totalPrice}€</td>
                 </tr>
               </table>
             </div>
@@ -103,13 +105,13 @@ export default function InlineLink() {
           <div className="billingAddress" style={{ margin: '0 2em' }}>
             <h3 style={h3}>Billing Address</h3>
             <div style={{ padding: '0 2em', color: '#777674' }}>
-              <p>emri mbiemri </p>
-              <p>street address</p>
-              <p>State</p>
-              <p>City</p>
-              <p>PostalCode</p>
-              <p>+38349123456</p>
-              <p>example@gmail.com</p>
+              <p>{order.user.name}</p>
+              <p>{order.shippingAddress.address}</p>
+              <p>{order.shippingAddress.country}</p>
+              <p>{order.shippingAddress.city}</p>
+              <p>{order.shippingAddress.postalCode}</p>
+              {/* <p>+38349123456</p> */}
+              <p>{order.user.email}</p>
             </div>
           </div>
           <div className="footerText" style={{ margin: '0 2em' }}>

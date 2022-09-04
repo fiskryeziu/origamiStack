@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
-import MyEmail from './Email'
+import ClientEmail from './ClientEmail'
 import { renderEmail } from 'react-html-email'
 
 const EmailHandler = () => {
@@ -12,7 +12,7 @@ const EmailHandler = () => {
   function handleSubmit(event) {
     event.preventDefault()
     const sendMail = async () => {
-      const messageHtml = renderEmail(<MyEmail />)
+      const messageHtml = renderEmail(<ClientEmail />)
       const response = await axios.post('/send', { name, email, messageHtml })
       if (response.data.msg === 'success') {
         alert('Email sent, awesome!')
@@ -42,7 +42,7 @@ const EmailHandler = () => {
       Send
     </button>
     //nrregulll a vazhdojm me dizajn t projektit tash
-    // <MyEmail />
+    // <ClientEmail name={name} email={email} />
   )
 }
 

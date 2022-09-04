@@ -1,9 +1,53 @@
+import axios from 'axios'
 import React from 'react'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import CustomTitle from '../components/CustomTitle'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 
 const ContactScreen = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    text: '',
+  })
+
+  const { name, email, text } = formData
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  const onChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }))
+  }
+  const submitHandler = (e) => {
+    e.preventDefault()
+    const sendEmail = async () => {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+
+      const response = await axios.post(
+        '/send/contact',
+        { name, email, text },
+        config
+      )
+      if (response.data.msg === 'success') {
+        alert('Email sent, awesome!')
+      } else if (response.data.msg === 'fail') {
+        alert('Oops, something went wrong. Try again')
+      }
+    }
+    sendEmail()
+  }
+
   return (
     <>
       <CustomTitle title="Origami-Handmade | Contact" />
@@ -48,15 +92,17 @@ const ContactScreen = () => {
         </div>
         <div className="md:w-1/2 flex flex-col space-y-10 border-t-2 md:border-t-0 mt-4">
           <h1 className="text-3xl text-gray-700">Drop us a line or two</h1>
-          <form action="" className="space-y-10">
+          <form className="space-y-10" onSubmit={submitHandler}>
             <div className="flex flex-col">
               <label htmlFor="Name" className="font-semibold">
                 Name
               </label>
               <input
                 type="text"
+                name="name"
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Full name"
+                onChange={onChange}
               />
             </div>
             <div className="flex flex-col">
@@ -65,8 +111,10 @@ const ContactScreen = () => {
               </label>
               <input
                 type="text"
+                name="email"
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Email"
+                onChange={onChange}
               />
             </div>
             <div className="flex flex-col">
@@ -75,7 +123,9 @@ const ContactScreen = () => {
               </label>
               <textarea
                 type="text"
+                name="text"
                 className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                onChange={onChange}
               />
             </div>
 

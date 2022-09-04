@@ -6,12 +6,15 @@ import Alert from '../components/Alert'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
+import ClientEmail from '../email/ClientEmail'
 import { getOrderDetails } from '../reducers/orderDetailsSlice'
 import moment from 'moment'
 import { orderPayReset, payOrder } from '../reducers/orderPaySlice'
-import { Button } from 'react-daisyui'
 import { deliverOrder, orderDeliverReset } from '../reducers/orderDeliverSlice'
 import CustomTitle from '../components/CustomTitle'
+import { renderEmail } from 'react-html-email'
+import axios from 'axios'
+import { orderCreateReset } from '../reducers/orderSlice'
 
 const OrderScreen = () => {
   const params = useParams()
@@ -31,13 +34,6 @@ const OrderScreen = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  //getting env file with routes from node
-  // const getPayPalClientId = async () => {
-  //   const { data: clientId } = await axios.get('/config/paypal')
-
-  //   return clientId
-  // }
-
   useEffect(() => {
     if (!userInfo) {
       navigate('/sign-in')
@@ -50,15 +46,30 @@ const OrderScreen = () => {
     }
   }, [dispatch, orderId, successPay, order, successDeliver, navigate, userInfo])
 
+  const name = order?.user.name
+  const email = order?.user.email
+  const sendMail = async () => {
+    const messageHtml = renderEmail(<ClientEmail order={order} name={name} />)
+    const response = await axios.post('/send', { name, email, messageHtml })
+    if (response.data.msg === 'success') {
+      alert('Email sent, awesome!')
+    } else if (response.data.msg === 'fail') {
+      alert('Oops, something went wrong. Try again')
+    }
+  }
+
   const successPaymentHandler = (paymentResult) => {
     const dataOrder = {
       orderId,
       paymentResult,
     }
     dispatch(payOrder(dataOrder))
+    dispatch(orderCreateReset())
   }
   const deliverHandler = () => {
     dispatch(deliverOrder(order))
+
+    sendMail()
   }
   return (
     <>
@@ -118,7 +129,7 @@ const OrderScreen = () => {
                 {order.isPaid ? (
                   <div className="w-full">
                     <Alert color="bg-green-500">
-                      Pain on:{' '}
+                      Paid on:{' '}
                       {moment(order.paidAt).format('MMMM Do YYYY, h:mm:ss a')}
                     </Alert>
                   </div>

@@ -8,6 +8,7 @@ import orderRoutes from './routes/orderRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import nodemailer from 'nodemailer'
+import emailRoutes from './routes/emailRoutes.js'
 
 config()
 
@@ -24,7 +25,7 @@ let mailTransporter = {
   },
 }
 
-let transporter = nodemailer.createTransport(mailTransporter)
+export let transporter = nodemailer.createTransport(mailTransporter)
 
 transporter.verify((error, success) => {
   if (error) {
@@ -41,6 +42,8 @@ app.get('/', (req, res) => {
   res.send('api is running')
 })
 
+app.use('/send', emailRoutes)
+
 app.use('/products', productRoutes)
 
 app.use('/users', userRoutes)
@@ -53,31 +56,6 @@ const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 // app.get('/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
-
-app.post('/send', (req, res, next) => {
-  const name = req.body.name
-  const email = req.body.email
-  const message = req.body.messageHtml
-
-  var mail = {
-    from: name,
-    to: email,
-    subject: 'Contact form request',
-    html: message,
-  }
-
-  transporter.sendMail(mail, (err, data) => {
-    if (err) {
-      res.json({
-        msg: 'fail',
-      })
-    } else {
-      res.json({
-        msg: 'success',
-      })
-    }
-  })
-})
 
 app.use(notFound)
 
