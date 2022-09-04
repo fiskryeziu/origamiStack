@@ -52,12 +52,12 @@ export default function InlineLink({ order, name }) {
             className="textContent"
             style={{ margin: '0 2em', color: '#777674' }}
           >
-            <p>Hi {name},</p>
+            <p>Hi {order.user.name},</p>
             <p>
               Just to let you know — we've received your order #{order._id}, and
               it is now being processed.
             </p>
-            <p>Pay with cash upon delivery.</p>
+            <p>Pay with cash upon delivery testim.</p>
           </div>
           <div style={{ margin: '0 2em' }}>
             <h3 style={h3}>
@@ -110,8 +110,8 @@ export default function InlineLink({ order, name }) {
               <p>{order.shippingAddress.country}</p>
               <p>{order.shippingAddress.city}</p>
               <p>{order.shippingAddress.postalCode}</p>
-              {/* <p>+38349123456</p> */}
-              <p>{order.user.email}</p>
+              <p>+38349123456</p>
+              <p>{order.email}</p>
             </div>
           </div>
           <div className="footerText" style={{ margin: '0 2em' }}>

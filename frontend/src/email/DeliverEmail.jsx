@@ -36,23 +36,24 @@ const th = {
 const h3 = {
   color: '#F25C05',
 }
-const fontColor = {
-  color: '#777674',
-}
-export default function InlineLink({ order }) {
+// const fontColor = {
+//   color: '#777674',
+// }
+export default function InlineLink({ order, name }) {
   return (
     <>
       <div className="wrapper" style={wrapper}>
         <span style={{ opacity: '0' }} />
         <div className="container" style={container}>
           <div className="headerText" style={headerText}>
-            <h1>New Order: #{order._id} </h1>
+            <h1>Thank you for your order </h1>
           </div>
           <div
             className="textContent"
             style={{ margin: '0 2em', color: '#777674' }}
           >
-            <p>You've received the following order from : {order.user.name}'</p>
+            <p>Hi {order.user.name},</p>
+            <p>We have processed your order, and it will reach you soon..</p>
           </div>
           <div style={{ margin: '0 2em' }}>
             <h3 style={h3}>

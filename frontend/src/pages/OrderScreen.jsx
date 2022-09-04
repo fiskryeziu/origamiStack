@@ -7,6 +7,8 @@ import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
 import ClientEmail from '../email/ClientEmail'
+import OwnerEmail from '../email/OwnerEmail'
+import DeliverEmail from '../email/DeliverEmail'
 import { getOrderDetails } from '../reducers/orderDetailsSlice'
 import moment from 'moment'
 import { orderPayReset, payOrder } from '../reducers/orderPaySlice'
@@ -48,13 +50,33 @@ const OrderScreen = () => {
 
   const name = order?.user.name
   const email = order?.user.email
-  const sendMail = async () => {
-    const messageHtml = renderEmail(<ClientEmail order={order} name={name} />)
+  const sendClientMail = async () => {
+    const messageHtml = renderEmail(<ClientEmail order={order} />)
     const response = await axios.post('/send', { name, email, messageHtml })
     if (response.data.msg === 'success') {
       alert('Email sent, awesome!')
     } else if (response.data.msg === 'fail') {
       alert('Oops, something went wrong. Try again')
+    }
+  }
+  const sendOwnerMail = async () => {
+    const email = 'fisnik.crz7@gmail.com'
+    const messageHtml = renderEmail(<OwnerEmail order={order} />)
+    const response = await axios.post('/send', { name, email, messageHtml })
+    if (response.data.msg === 'success') {
+      console.log('Email sent, awesome!')
+    } else if (response.data.msg === 'fail') {
+      console.error('Oops, something went wrong. Try again')
+    }
+  }
+
+  const sendDeliverMail = async () => {
+    const messageHtml = renderEmail(<DeliverEmail order={order} />)
+    const response = await axios.post('/send', { name, email, messageHtml })
+    if (response.data.msg === 'success') {
+      console.log('Email sent, awesome!')
+    } else if (response.data.msg === 'fail') {
+      console.error('Oops, something went wrong. Try again')
     }
   }
 
@@ -65,11 +87,14 @@ const OrderScreen = () => {
     }
     dispatch(payOrder(dataOrder))
     dispatch(orderCreateReset())
+
+    sendClientMail()
+
+    sendOwnerMail()
   }
   const deliverHandler = () => {
     dispatch(deliverOrder(order))
-
-    sendMail()
+    sendDeliverMail()
   }
   return (
     <>
