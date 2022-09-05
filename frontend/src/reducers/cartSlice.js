@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import API from '../api'
 
 const cartItemFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))
@@ -15,7 +15,7 @@ const initialState = {
 }
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/products/${id}`)
+  const { data } = await API.get(`/products/${id}`)
 
   dispatch(
     cartAddItem({

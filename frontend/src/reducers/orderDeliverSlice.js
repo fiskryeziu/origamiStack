@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import API from '../api'
 
 const initialState = {}
 
@@ -17,11 +17,7 @@ export const deliverOrder = createAsyncThunk(
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
-      const { data } = await axios.put(
-        `/orders/${order._id}/deliver`,
-        {},
-        config
-      )
+      const { data } = await API.put(`/orders/${order._id}/deliver`, {}, config)
       return data
     } catch (err) {
       const message =

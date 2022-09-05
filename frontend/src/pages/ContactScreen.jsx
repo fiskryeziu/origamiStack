@@ -1,6 +1,5 @@
-import axios from 'axios'
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import API from '../api'
 import { useSelector } from 'react-redux'
 import CustomTitle from '../components/CustomTitle'
 import Footer from '../components/Footer'
@@ -34,7 +33,7 @@ const ContactScreen = () => {
         },
       }
 
-      const response = await axios.post(
+      const response = await API.post(
         '/send/contact',
         { name, email, text },
         config

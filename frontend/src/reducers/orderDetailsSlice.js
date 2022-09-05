@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import API from '../api'
 
 const initialState = {
   loading: true,
@@ -22,7 +22,7 @@ export const getOrderDetails = createAsyncThunk(
         },
       }
 
-      const { data } = await axios.get(`/orders/${id}`, config)
+      const { data } = await API.get(`/orders/${id}`, config)
 
       return data
     } catch (err) {

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import API from '../api'
 import { orderMyListReset } from './orderMyListSlice'
 import { userDetailsReset } from './userDetailsSlice'
 import { userListReset } from './userListSlice'
@@ -23,7 +23,7 @@ export const loginActions = createAsyncThunk(
           'Content-Type': 'application/json',
         },
       }
-      const { data } = await axios.post('/users/login', userData, config)
+      const { data } = await API.post('/users/login', userData, config)
 
       if (data) {
         localStorage.setItem('userInfo', JSON.stringify(data))
@@ -49,7 +49,7 @@ export const registerActions = createAsyncThunk(
           'Content-Type': 'application/json',
         },
       }
-      const { data } = await axios.post('/users', userData, config)
+      const { data } = await API.post('/users', userData, config)
       if (data) {
         localStorage.setItem('userInfo', JSON.stringify(data))
       }

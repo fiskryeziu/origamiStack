@@ -15,8 +15,8 @@ import { orderPayReset, payOrder } from '../reducers/orderPaySlice'
 import { deliverOrder, orderDeliverReset } from '../reducers/orderDeliverSlice'
 import CustomTitle from '../components/CustomTitle'
 import { renderEmail } from 'react-html-email'
-import axios from 'axios'
 import { orderCreateReset } from '../reducers/orderSlice'
+import API from '../api'
 
 const OrderScreen = () => {
   const params = useParams()
@@ -52,7 +52,7 @@ const OrderScreen = () => {
   const email = order?.user.email
   const sendClientMail = async () => {
     const messageHtml = renderEmail(<ClientEmail order={order} />)
-    const response = await axios.post('/send', { name, email, messageHtml })
+    const response = await API.post('/send', { name, email, messageHtml })
     if (response.data.msg === 'success') {
       alert('Email sent, awesome!')
     } else if (response.data.msg === 'fail') {
@@ -62,7 +62,7 @@ const OrderScreen = () => {
   const sendOwnerMail = async () => {
     const email = 'fisnik.crz7@gmail.com'
     const messageHtml = renderEmail(<OwnerEmail order={order} />)
-    const response = await axios.post('/send', { name, email, messageHtml })
+    const response = await API.post('/send', { name, email, messageHtml })
     if (response.data.msg === 'success') {
       console.log('Email sent, awesome!')
     } else if (response.data.msg === 'fail') {
@@ -72,7 +72,7 @@ const OrderScreen = () => {
 
   const sendDeliverMail = async () => {
     const messageHtml = renderEmail(<DeliverEmail order={order} />)
-    const response = await axios.post('/send', { name, email, messageHtml })
+    const response = await API.post('/send', { name, email, messageHtml })
     if (response.data.msg === 'success') {
       console.log('Email sent, awesome!')
     } else if (response.data.msg === 'fail') {

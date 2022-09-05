@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import API from '../api'
 
 const initialState = {}
 
@@ -18,7 +18,7 @@ export const createOrder = createAsyncThunk(
         },
       }
 
-      const { data } = await axios.post('/orders', order, config)
+      const { data } = await API.post('/orders', order, config)
       return data
     } catch (err) {
       const message =

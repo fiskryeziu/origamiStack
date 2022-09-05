@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import axios from 'axios'
+import API from '../api'
 
 const initialState = {
   loading: false,
@@ -12,7 +12,7 @@ export const fetchProducts = createAsyncThunk(
   async (obj) => {
     const { pageNumber = '', rangeValue = '' } = obj
 
-    const { data } = await axios.get(
+    const { data } = await API.get(
       `/products?pageNumber=${pageNumber}&rangeValue=${rangeValue}`
     )
     return data

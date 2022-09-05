@@ -2,6 +2,7 @@ import express from 'express'
 import path from 'path'
 import connectDB from './config/db.js'
 import { config } from 'dotenv'
+import cors from 'cors'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
@@ -15,6 +16,8 @@ config()
 connectDB()
 
 const app = express()
+
+app.use(cors())
 
 // nodemialer  start
 let mailTransporter = {

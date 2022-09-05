@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import API from '../api'
 
 const initialState = {
   products: [],
@@ -9,7 +9,7 @@ export const listTopProducts = createAsyncThunk(
   'topRatedProduct/listTopProductcs',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get('/products/top')
+      const { data } = await API.get('/products/top')
 
       return data
     } catch (err) {

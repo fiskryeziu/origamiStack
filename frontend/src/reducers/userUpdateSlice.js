@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import API from '../api'
 
 const initialState = {}
 
@@ -16,7 +16,7 @@ export const userUpdate = createAsyncThunk(
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
-      const { data } = await axios.put(`/users/${user._id}`, user, config)
+      const { data } = await API.put(`/users/${user._id}`, user, config)
       return data
     } catch (err) {
       const message =

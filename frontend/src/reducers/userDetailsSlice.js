@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import API from '../api'
 
 const initialState = {
   user: {},
@@ -19,7 +19,7 @@ export const getUserDetails = createAsyncThunk(
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
-    const { data } = await axios.get(`/users/${id}`, config)
+    const { data } = await API.get(`/users/${id}`, config)
     return data
   }
 )
