@@ -10,6 +10,8 @@ import uploadRoutes from './routes/uploadRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import nodemailer from 'nodemailer'
 import emailRoutes from './routes/emailRoutes.js'
+import forgotPasswordRoutes from './routes/forgotPasswordRoutes.js'
+import resetPasswordRoutes from './routes/resetPasswordRoutes.js'
 
 config()
 
@@ -54,6 +56,10 @@ app.use('/users', userRoutes)
 app.use('/orders', orderRoutes)
 
 app.use('/upload', uploadRoutes)
+
+app.use('/forgot-password', forgotPasswordRoutes)
+
+app.use('/reset-password', resetPasswordRoutes)
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
