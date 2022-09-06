@@ -1,10 +1,12 @@
 import express from 'express'
-import { clientSendMail, sendEmail } from '../controllers/emailController.js'
-import { protect } from '../middleware/authMiddleware.js'
+import {
+  clientSendMail,
+  sendEmailHtml,
+} from '../controllers/emailController.js'
 
 const router = express.Router()
 
-router.route('/').post(sendEmail)
+router.route('/').post(sendEmailHtml)
 router.route('/contact').post(clientSendMail)
 
 export default router

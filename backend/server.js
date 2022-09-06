@@ -23,12 +23,12 @@ app.use(cors())
 let mailTransporter = {
   service: 'gmail',
   auth: {
-    user: 'fisnik.crz7@gmail.com',
-    pass: 'vlatajorkvgslmir',
+    user: process.env.EMAIL,
+    pass: process.env.PASS_EMAIL,
   },
 }
 
-export let transporter = nodemailer.createTransport(mailTransporter)
+export const transporter = nodemailer.createTransport(mailTransporter)
 
 transporter.verify((error, success) => {
   if (error) {

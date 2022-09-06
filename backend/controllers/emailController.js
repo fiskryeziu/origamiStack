@@ -1,11 +1,11 @@
 import { transporter } from '../server.js'
-const sendEmail = (req, res, next) => {
+const sendEmailHtml = (req, res, next) => {
   const name = req.body.name
   const email = req.body.email
   const message = req.body.messageHtml
 
-  var mail = {
-    from: name,
+  const mail = {
+    from: email,
     to: email,
     subject: 'Origami Handmade',
     html: message,
@@ -23,14 +23,14 @@ const sendEmail = (req, res, next) => {
     }
   })
 }
+
 const clientSendMail = (req, res, next) => {
   const name = req.body.name
   const email = req.body.email
   const text = req.body.text
-
-  var mail = {
-    from: name,
-    to: email,
+  const mail = {
+    from: `${name} <${email}>`,
+    to: process.env.EMAIL,
     subject: 'Email from Origami Contact form',
     text: text,
   }
@@ -48,4 +48,4 @@ const clientSendMail = (req, res, next) => {
   })
 }
 
-export { sendEmail, clientSendMail }
+export { sendEmailHtml, clientSendMail }

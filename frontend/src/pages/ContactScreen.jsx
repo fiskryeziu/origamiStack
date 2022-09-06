@@ -4,49 +4,9 @@ import { useSelector } from 'react-redux'
 import CustomTitle from '../components/CustomTitle'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
+import contactus from '../assets/images/contactus.jpg'
 
 const ContactScreen = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    text: '',
-  })
-
-  const { name, email, text } = formData
-
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
-
-  const onChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
-  }
-  const submitHandler = (e) => {
-    e.preventDefault()
-    const sendEmail = async () => {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${userInfo.token}`,
-        },
-      }
-
-      const response = await API.post(
-        '/send/contact',
-        { name, email, text },
-        config
-      )
-      if (response.data.msg === 'success') {
-        alert('Email sent, awesome!')
-      } else if (response.data.msg === 'fail') {
-        alert('Oops, something went wrong. Try again')
-      }
-    }
-    sendEmail()
-  }
-
   return (
     <>
       <CustomTitle title="Origami-Handmade | Contact" />
@@ -62,11 +22,7 @@ const ContactScreen = () => {
       <div className="flex justify-between m-10 flex-col md:flex-row">
         <div className="md:w-1/2 space-y-10">
           <h1 className="text-5xl">Get in Touch</h1>
-          <p className="text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex
-            necessitatibus cum fuga, blanditiis impedit nulla repellat
-            exercitationem explicabo repellendus perspiciatis.
-          </p>
+
           <div className="flex flex-col">
             <div className="flex items-center space-x-2">
               <i className="fa fa-location-arrow"></i>{' '}
@@ -84,13 +40,25 @@ const ContactScreen = () => {
           <div className="flex flex-col">
             <div className="flex items-center space-x-2">
               <i className="fa fa-envelope"></i>{' '}
-              <p className="text-gray-600">Our location</p>
+              <p className="text-gray-600">Contact Us</p>
             </div>
-            <p className="font-bold">origamihandmade8@gmail.com</p>
+            <a
+              href="mailto:fiskryeziu@gmail.com?subject=Email from Origami Contact form"
+              className="font-bold"
+            >
+              origamihandmade8@gmail.com
+            </a>
           </div>
         </div>
         <div className="md:w-1/2 flex flex-col space-y-10 border-t-2 md:border-t-0 mt-4">
-          <h1 className="text-3xl text-gray-700">Drop us a line or two</h1>
+          <div className="flex justify-end">
+            <img
+              src={contactus}
+              className="hidden md:block rounded-full w-96 h-96"
+              alt="contactimg"
+            />
+          </div>
+          {/* <h1 className="text-3xl text-gray-700">Drop us a line or two</h1>
           <form className="space-y-10" onSubmit={submitHandler}>
             <div className="flex flex-col">
               <label htmlFor="Name" className="font-semibold">
@@ -131,7 +99,7 @@ const ContactScreen = () => {
             <button className="rounded-full bg-sky-700 px-3 py-1 text-white hover:brightness-125">
               Submit
             </button>
-          </form>
+          </form> */}
         </div>
       </div>
       <Footer />
