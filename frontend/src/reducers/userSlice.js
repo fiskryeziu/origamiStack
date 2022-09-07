@@ -28,7 +28,7 @@ export const loginActions = createAsyncThunk(
       if (data) {
         localStorage.setItem('userInfo', JSON.stringify(data))
       }
-      return await data
+      return data
     } catch (error) {
       const message =
         error.response && error.response.data

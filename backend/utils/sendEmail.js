@@ -16,7 +16,7 @@ export const sendResetMail = async (email, subject, text) => {
       subject: subject,
       text: text,
     })
-    console.log('email sent successfully')
+    console.log('email sent')
   } catch (error) {
     console.log('email not sent!')
     console.log(error)

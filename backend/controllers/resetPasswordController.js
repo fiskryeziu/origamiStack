@@ -23,19 +23,20 @@ const resetPassword = asyncHandler(async (req, res) => {
 
 const postResetPassword = asyncHandler(async (req, res) => {
   const { password } = req.body
+  const token = req.params.token
 
   const user = await User.findById(req.params.id)
-
   if (!user) {
     res.status(401)
     throw new Error('Invalid id...')
   }
   const secret = process.env.JWT_SECRET
   try {
-    const payload = jwt.verify(token, secret)
+    jwt.verify(token, secret)
+
     user.password = password
 
-    const updatedUser = await user.save()
+    await user.save()
 
     res.status(200).json({ message: 'Password reset successfully' })
   } catch (error) {

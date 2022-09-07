@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import EmailHandler from './email/EmailHandler'
 import CartScreen from './pages/CartScreen'
 import ContactScreen from './pages/ContactScreen'
+import ForgotPasswordScreen from './pages/ForgotPasswordScreen'
 import HomeScreen from './pages/HomeScreen'
 import LoginScreen from './pages/LoginScreen'
 import MyAccountScreen from './pages/MyAccountScreen'
@@ -15,6 +16,7 @@ import ProductEditScreen from './pages/ProductEditScreen'
 import ProductListScreen from './pages/ProductListScreen'
 import ProductScreen from './pages/ProductScreen'
 import RegisterScreen from './pages/RegisterScreen'
+import ResetPasswordScreen from './pages/ResetPasswordScreen'
 import ShippingScreen from './pages/ShippingScreen'
 import SingleProduct from './pages/SingleProduct'
 import UserEditScreen from './pages/UserEditScreen'
@@ -26,6 +28,12 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/forgot-password" element={<ForgotPasswordScreen />} />
+        <Route path="/reset-password" element={<ResetPasswordScreen />} />
+        <Route
+          path="/reset-password/:id/:token"
+          element={<ResetPasswordScreen />}
+        />
         <Route path="/email" element={<EmailHandler />} />
         <Route path="/products" element={<ProductScreen />} />
         <Route path="/products/page/:pageNumber" element={<ProductScreen />} />

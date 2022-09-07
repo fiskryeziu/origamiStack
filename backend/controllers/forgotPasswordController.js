@@ -14,12 +14,10 @@ const forgotPassword = asyncHandler(async (req, res, next) => {
   } else {
     const token = generateResetPasswordToken(user._id)
 
-    const link = `http://localhost:5000/reset-password/${user._id}/${token}`
+    const link = `http://localhost:3000/reset-password/${user._id}/${token}`
     await sendResetMail(user.email, 'Password Reset', link)
-    res.send('Password reset link has been sent to your email')
+    res.json({ message: 'Password reset link has been sent to your email' })
   }
-
-  //   res.send({ message: 'success', email })
 })
 
 export { forgotPassword }
