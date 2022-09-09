@@ -15,8 +15,6 @@ import {
   productUpdateReset,
   updateProduct,
 } from '../reducers/productUpdateSlice'
-import { getUserDetails, userDetailsReset } from '../reducers/userDetailsSlice'
-import { userUpdate, userUpdateReset } from '../reducers/userUpdateSlice'
 
 const ProductEditScreen = () => {
   const params = useParams()
@@ -134,7 +132,7 @@ const ProductEditScreen = () => {
           <h1 className="text-3xl text-gray-800">Product Edit</h1>
 
           <Link
-            to="/admin/userList"
+            to="/admin/products"
             className="absolute top-2 left-2 underline"
           >
             Go Back

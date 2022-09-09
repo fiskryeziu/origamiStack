@@ -9,7 +9,10 @@ import Spinner from '../components/Spinner'
 import ClientEmail from '../email/ClientEmail'
 import OwnerEmail from '../email/OwnerEmail'
 import DeliverEmail from '../email/DeliverEmail'
-import { getOrderDetails } from '../reducers/orderDetailsSlice'
+import {
+  getOrderDetails,
+  orderDetailsReset,
+} from '../reducers/orderDetailsSlice'
 import moment from 'moment'
 import { orderPayReset, payOrder } from '../reducers/orderPaySlice'
 import { deliverOrder, orderDeliverReset } from '../reducers/orderDeliverSlice'
@@ -44,6 +47,7 @@ const OrderScreen = () => {
     if (!order || successPay || order._id !== orderId || successDeliver) {
       dispatch(orderPayReset())
       dispatch(orderDeliverReset())
+      dispatch(orderDetailsReset())
       dispatch(getOrderDetails(orderId))
     }
   }, [dispatch, orderId, successPay, order, successDeliver, navigate, userInfo])
