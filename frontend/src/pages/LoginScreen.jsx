@@ -95,6 +95,11 @@ const LoginScreen = () => {
             >
               <span>Sign in to account</span>
             </button>
+            <div className="my-3">
+              <Link to="/forgot-password" className="text-sm underline">
+                Forgot password
+              </Link>
+            </div>
             <p className="mt-8 text-center">
               <Link to="/register" className="text-sm hover:underline">
                 Create Account.

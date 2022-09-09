@@ -42,7 +42,6 @@ const CartScreen = () => {
   }
   return (
     <div className="flex flex-col h-screen">
-      <CustomTitle title="Origami-Handmade | Cart" />
       <NavBar />
       <div className="flex flex-col md:flex-row my-10">
         <div className="w-full md:w-3/4 flex flex-col m-2">

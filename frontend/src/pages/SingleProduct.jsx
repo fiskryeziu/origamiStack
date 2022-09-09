@@ -87,7 +87,12 @@ const SingleProduct = () => {
                 <Rating value={product.rating} />
               </div>
               <div className="py-4 border-2 flex items-center px-1">
-                <h1>{product.price}$</h1>
+                <h1>
+                  Dimensions: {product.width}cm <b>x</b> {product.height}cm
+                </h1>
+              </div>
+              <div className="py-4 border-2 flex items-center px-1">
+                <h1>{product.price}€</h1>
               </div>
               <div className="p-1">
                 <p>{product.description}</p>
@@ -98,7 +103,7 @@ const SingleProduct = () => {
             <div className="flex w-full md:w-1/4 flex-col">
               <div className="flex justify-between border-2 p-2 flex-col lg:flex-row">
                 <p>Price</p>
-                <p>{product.price}$</p>
+                <p>{product.price}€</p>
               </div>
               <div className="flex justify-between border-x-2 p-2 border-b-2 flex-col lg:flex-row">
                 <p>Status</p>

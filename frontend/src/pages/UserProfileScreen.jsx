@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Alert from '../components/Alert'
 import CustomTitle from '../components/CustomTitle'
 import Footer from '../components/Footer'
 import NavBar from '../components/NavBar'
 import Spinner from '../components/Spinner'
 import { getUserDetails } from '../reducers/userDetailsSlice'
-import { registerActions } from '../reducers/userSlice'
 import {
   updateUserProfile,
   userUpdateProfileReset,

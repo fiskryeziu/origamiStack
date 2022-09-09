@@ -23,6 +23,8 @@ const ProductEditScreen = () => {
     name: '',
     price: 0,
     image: '',
+    width: 0,
+    height: 0,
     brand: '',
     category: '',
     countInStock: 0,
@@ -30,8 +32,17 @@ const ProductEditScreen = () => {
   })
   const [uploading, setUploading] = useState(false)
 
-  const { name, price, image, brand, category, countInStock, description } =
-    formData
+  const {
+    name,
+    price,
+    image,
+    width,
+    height,
+    brand,
+    category,
+    countInStock,
+    description,
+  } = formData
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -58,6 +69,8 @@ const ProductEditScreen = () => {
           name: product.name,
           price: product.price,
           image: product.image,
+          width: product.width,
+          height: product.height,
           brand: product.brand,
           category: product.category,
           countInStock: product.countInStock,
@@ -68,17 +81,10 @@ const ProductEditScreen = () => {
   }, [dispatch, productId, product, navigate, successUpdate])
 
   const onChange = (e) => {
-    if (e.target.type === 'checkbox') {
-      //   setFormData((prev) => ({
-      //     ...prev,
-      //     isAdmin: !isAdmin,
-      //   }));
-    } else {
-      setFormData((prevState) => ({
-        ...prevState,
-        [e.target.name]: e.target.value,
-      }))
-    }
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
   }
 
   const submitHandler = (e) => {
@@ -91,6 +97,8 @@ const ProductEditScreen = () => {
         price,
         image,
         category,
+        width,
+        height,
         brand,
         description,
         countInStock,
@@ -209,6 +217,38 @@ const ProductEditScreen = () => {
                 {uploading && <Spinner />}
               </div>
 
+              <div className="mb-6">
+                <label
+                  htmlFor="width"
+                  className="block text-sm font-semibold leading-6 text-gray-900"
+                >
+                  Width
+                </label>
+                <input
+                  type="text"
+                  name="width"
+                  className="mt-2 appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200"
+                  value={width}
+                  placeholder="Enter width"
+                  onChange={onChange}
+                />
+              </div>
+              <div className="mb-6">
+                <label
+                  htmlFor="height"
+                  className="block text-sm font-semibold leading-6 text-gray-900"
+                >
+                  Height
+                </label>
+                <input
+                  type="text"
+                  name="height"
+                  className="mt-2 appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200"
+                  value={height}
+                  placeholder="Enter Height"
+                  onChange={onChange}
+                />
+              </div>
               <div className="mb-6">
                 <label
                   htmlFor="brand"
