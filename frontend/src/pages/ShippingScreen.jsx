@@ -17,8 +17,9 @@ const ShippingScreen = () => {
     city: shippingAddress.city,
     postalCode: shippingAddress.postalCode,
     country: shippingAddress.country,
+    phoneNumber: shippingAddress.phoneNumber,
   })
-  const { address, city, postalCode, country } = formData
+  const { address, city, postalCode, country, phoneNumber } = formData
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -33,7 +34,9 @@ const ShippingScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    dispatch(saveShippingAdress({ address, city, postalCode, country }))
+    dispatch(
+      saveShippingAdress({ address, city, postalCode, country, phoneNumber })
+    )
     navigate('/payment')
   }
 
@@ -60,6 +63,23 @@ const ShippingScreen = () => {
                 required
                 value={address}
                 placeholder="Address"
+                onChange={onChange}
+              />
+            </div>
+            <div className="mb-6">
+              <label
+                htmlFor="phoneNumber"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phoneNumber"
+                className="mt-2 appearance-none text-slate-900 bg-white rounded-md block w-full px-3 h-10 shadow-sm sm:text-sm focus:outline-none placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500 ring-1 ring-slate-200"
+                required
+                value={phoneNumber}
+                placeholder="Phone number"
                 onChange={onChange}
               />
             </div>

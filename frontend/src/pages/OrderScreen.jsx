@@ -129,6 +129,10 @@ const OrderScreen = () => {
                   </a>
                 </p>
                 <p>
+                  <strong className="text-gray-700">Phone Number: </strong>
+                  {order.shippingAddress.phoneNumber}
+                </p>
+                <p>
                   <strong className="text-gray-700">Address: </strong>
                   {order.shippingAddress.address}, {order.shippingAddress.city},
                   {order.shippingAddress.postalCode},

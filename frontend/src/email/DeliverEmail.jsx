@@ -36,9 +36,6 @@ const th = {
 const h3 = {
   color: '#F25C05',
 }
-// const fontColor = {
-//   color: '#777674',
-// }
 export default function InlineLink({ order, name }) {
   return (
     <>
@@ -106,8 +103,8 @@ export default function InlineLink({ order, name }) {
               <p>{order.shippingAddress.country}</p>
               <p>{order.shippingAddress.city}</p>
               <p>{order.shippingAddress.postalCode}</p>
-              <p>+38349123456</p>
-              <p>{order.email}</p>
+              <p>{order.shippingAddress.phoneNumber}</p>
+              <p>{order.user.email}</p>
             </div>
           </div>
           <div className="footerText" style={{ margin: '0 2em' }}>
