@@ -66,7 +66,7 @@ const CartScreen = () => {
                       {item.name}
                     </Link>
                   </div>
-                  <p>${item.price}</p>
+                  <p>{item.price}€</p>
                   <div className="w-1/2 md:w-32">
                     <select
                       value={item.qty}
@@ -102,7 +102,7 @@ const CartScreen = () => {
               ITEMS
             </h1>
             <p className="p-2 text-gray-500">
-              $
+              €
               {cartItems
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
