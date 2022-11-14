@@ -1,15 +1,10 @@
-import React from "react";
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper-bundle.css";
-import origamivase from "../assets/images/origamivase.jpg";
-import origami2 from "../assets/images/origami2.jpg";
-import origami3 from "../assets/images/origami3.jpg";
-import origami4 from "../assets/images/origami4.jpg";
-import origami5 from "../assets/images/origami5.jpg";
-import products from "../product";
+import React from 'react'
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/swiper-bundle.css'
+import products from '../product'
 
-SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 const Carousel = () => {
   return (
@@ -45,7 +40,7 @@ const Carousel = () => {
         </SwiperSlide>
       ))}
     </Swiper>
-  );
-};
+  )
+}
 
-export default Carousel;
+export default Carousel
