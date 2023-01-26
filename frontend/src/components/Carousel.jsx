@@ -3,6 +3,7 @@ import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 import products from '../product'
+import { v4 as uuidv4 } from 'uuid'
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
@@ -25,10 +26,10 @@ const Carousel = () => {
       pagination={{ clickable: true }}
       className="w-full mb-40"
     >
-      {products.map((product) => (
+      {products.slice(0, 5).map((product) => (
         <SwiperSlide
           className="bg-center bg-cover flex justify-center"
-          key={product._id}
+          key={uuidv4()}
         >
           <div className="w-[345px] h-[345px]">
             <img
