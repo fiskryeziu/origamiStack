@@ -17,9 +17,9 @@ import moment from 'moment'
 import { orderPayReset, payOrder } from '../reducers/orderPaySlice'
 import { deliverOrder, orderDeliverReset } from '../reducers/orderDeliverSlice'
 import CustomTitle from '../components/CustomTitle'
-import { renderEmail } from 'react-html-email'
 import { orderCreateReset } from '../reducers/orderSlice'
 import API from '../api'
+import renderEmail from '../util/renderEmail'
 
 const OrderScreen = () => {
   const params = useParams()
