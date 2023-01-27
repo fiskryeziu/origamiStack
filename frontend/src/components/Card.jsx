@@ -11,7 +11,7 @@ const Card = ({ width, height, product }) => {
         className="rounded-lg shadow-lg bg-white max-w-sm m-2"
       >
         <img
-          className={`rounded-t-md w-[${width}px] h-[${height}px] mx-auto object-contain`}
+          className={`rounded-t-md w-[${width}px] h-[${height}px] mx-auto object-cover`}
           src={product.image}
           alt=""
         />
@@ -22,7 +22,7 @@ const Card = ({ width, height, product }) => {
           <div className="flex">
             <Rating value={product.rating} />
           </div>
-          <h1 className="text-2xl">{product.price}$</h1>
+          <h1 className="text-2xl">{product.price}€</h1>
         </div>
       </Link>
     </div>
