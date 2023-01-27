@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import ClientEmail from './ClientEmail'
-import { renderEmail } from 'react-html-email'
+import renderEmail from '../util/renderEmail'
 
 const EmailHandler = () => {
   const [name, setName] = useState('fisnik')
