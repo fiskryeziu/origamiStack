@@ -46,7 +46,7 @@ const NavBar = () => {
         </div>
       </div>
       <ul
-        className={`w-full flex flex-col text-[18px] space-y-4 z-50 bg-slate-200 absolute px-8 duration-400 transition-all ${
+        className={`w-full flex flex-col text-[18px] space-y-4 z-50 bg-slate-100 absolute p-8 duration-400 transition-all ${
           !nav ? `left-[-100%]` : `left-0`
         }`}
       >
