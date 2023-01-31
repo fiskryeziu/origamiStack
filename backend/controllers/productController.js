@@ -7,13 +7,13 @@ import Product from '../models/productModel.js'
 //access public
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = 6
-  const page = Number(req.query.pageNumber) || 1
+  const page = +req.query.pageNumber || 1
 
   const rangeValue = Number(req.query.rangeValue) || 0
 
   const count = await Product.count()
   const products = await Product.find({})
-    .sort({ createdAt: -1 })
+    .sort({ createdAt: 'descending', _id: -1 })
     .limit(pageSize)
     .skip((page - 1) * pageSize)
     .where('price')

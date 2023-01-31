@@ -1,7 +1,7 @@
 const products = [
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami1.jpeg',
+    image: '/images/origami1.webp',
     description: 'Handmade vase by 1600 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 25,
@@ -14,7 +14,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami2.jpeg',
+    image: '/images/origami2.webp',
     description: 'Handmade vase by 9400 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 65,
@@ -27,7 +27,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami3.jpeg',
+    image: '/images/origami3.webp',
     description: 'Handmade vase by 12000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 60,
@@ -40,7 +40,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami4.jpeg',
+    image: '/images/origami4.webp',
     description: 'Handmade vase by 1600 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 25,
@@ -53,7 +53,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami5.jpeg',
+    image: '/images/origami5.webp',
     description: 'Handmade vase by 1600 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 25,
@@ -66,7 +66,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami6.jpeg',
+    image: '/images/origami6.webp',
     description: 'Handmade vase by 1600 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 25,
@@ -79,7 +79,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami7.jpeg',
+    image: '/images/origami7.webp',
     description: 'Handmade vase by 2000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 30,
@@ -92,7 +92,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami8.jpeg',
+    image: '/images/origami8.webp',
     description: 'Handmade vase by 2000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 30,
@@ -105,7 +105,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami9.jpeg',
+    image: '/images/origami9.webp',
     description: 'Handmade vase by 2500 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 25,
@@ -118,7 +118,7 @@ const products = [
   },
   {
     name: 'Big Luxury Vase 3d Origami High Quality',
-    image: '/images/origami10.jpeg',
+    image: '/images/origami10.webp',
     description: 'Handmade vase by 20000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 100,
@@ -131,7 +131,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami11.jpeg',
+    image: '/images/origami11.webp',
     description: 'Handmade vase by 18000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 75,
@@ -144,7 +144,7 @@ const products = [
   },
   {
     name: 'Big Luxury Vase 3d Origami High Quality',
-    image: '/images/origami12.jpeg',
+    image: '/images/origami12.webp',
     description: 'Handmade vase by 30000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 120,
@@ -157,7 +157,7 @@ const products = [
   },
   {
     name: 'Luxury Vase 3d Origami High Quality',
-    image: '/images/origami13.jpeg',
+    image: '/images/origami13.webp',
     description: 'Handmade vase by 6000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 80,
@@ -170,7 +170,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami14.jpeg',
+    image: '/images/origami14.webp',
     description: 'Handmade vase by 2400 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 25,
@@ -183,7 +183,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami15.jpeg',
+    image: '/images/origami15.webp',
     description: 'Handmade vase by 6000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 80,
@@ -196,7 +196,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami16.jpeg',
+    image: '/images/origami16.webp',
     description: 'Handmade vase by 10000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 45,
@@ -209,7 +209,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami17.jpeg',
+    image: '/images/origami17.webp',
     description: 'Handmade vase by 8000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 45,
@@ -222,7 +222,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami18.jpeg',
+    image: '/images/origami18.webp',
     description: 'Handmade vase by 2400 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 25,
@@ -235,7 +235,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami19.jpeg',
+    image: '/images/origami19.webp',
     description: 'Handmade vase by 1600 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 25,
@@ -248,7 +248,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami20.jpeg',
+    image: '/images/origami20.webp',
     description: 'Handmade vase by 1600 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 25,
@@ -261,7 +261,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami21.jpeg',
+    image: '/images/origami21.webp',
     description: 'Handmade vase by 2000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 30,
@@ -274,7 +274,7 @@ const products = [
   },
   {
     name: 'Vase 3d Origami High Quality',
-    image: '/images/origami22.jpeg',
+    image: '/images/origami22.webp',
     description: 'Handmade vase by 2600 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 30,
@@ -287,7 +287,7 @@ const products = [
   },
   {
     name: 'Luxury Big Vase 3d Origami High Quality',
-    image: '/images/origami23.jpeg',
+    image: '/images/origami23.webp',
     description: 'Handmade vase by 23000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 100,
@@ -300,7 +300,7 @@ const products = [
   },
   {
     name: 'Luxury Big Vase 3d Origami High Quality',
-    image: '/images/origami24.jpeg',
+    image: '/images/origami24.webp',
     description: 'Handmade vase by 6000 folded papers(1/16 of A4)',
     brand: 'paper',
     height: 35,
