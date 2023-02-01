@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler'
+import { s3Delete } from '../middleware/s3Service.js'
 import Product from '../models/productModel.js'
 
 //fetch products
@@ -45,6 +46,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id)
 
   if (product) {
+    s3Delete(product.image)
     await product.remove()
     res.json({ message: 'Product Removed' })
   } else {
@@ -62,7 +64,7 @@ const createProduct = asyncHandler(async (req, res) => {
     name: 'Sample Name',
     price: 0,
     user: req.user._id,
-    image: '/images/sample.jpg',
+    image: '/images/sample.webp',
     brand: 'sample brand',
     height: 0,
     width: 0,
@@ -93,10 +95,20 @@ const updateProduct = asyncHandler(async (req, res) => {
     category,
     countInStock,
   } = req.body
-
+  console.log(image)
   const product = await Product.findById(req.params.id)
 
   if (product) {
+    if (
+      product.image.startsWith(
+        'https://renta-car-sif-2022.s3.eu-central-1.amazonaws.com/'
+      )
+    ) {
+      console.log('me link koka')
+      s3Delete(product.image)
+    } else {
+      product.image = ''
+    }
     product.name = name
     product.price = price
     product.description = description
@@ -111,7 +123,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     res.json(createdProduct)
   } else {
     res.status(404)
-    throw new Error('Prodcut not found')
+    throw new Error('Product not found')
   }
 })
 

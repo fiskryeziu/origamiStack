@@ -70,7 +70,7 @@ const HomeScreen = () => {
                   </Link>
                 </div>
               </div>
-              <div className="flex flex-row justify-center items-center flex-wrap">
+              <div className="flex flex-row justify-center  flex-wrap">
                 {error ? (
                   <Alert color="bg-red-500">{error}</Alert>
                 ) : (

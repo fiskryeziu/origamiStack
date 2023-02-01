@@ -8,10 +8,10 @@ const Card = ({ width, height, product }) => {
     <div className="flex justify-center">
       <Link
         to={`/product-details/${product._id}`}
-        className="rounded-lg shadow-md bg-white max-w-sm m-2"
+        className="rounded-lg shadow-md bg-white max-w-xs m-2"
       >
         <img
-          className={`rounded-t-md w-[${width}px] h-[${height}px] mx-auto object-contain`}
+          className={`rounded-t-md w-[${width}px] h-[${height}px] mx-auto object-cover`}
           src={product.image}
           alt=""
         />

@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import api from '../api'
 import Alert from '../components/Alert'
 import CustomTitle from '../components/CustomTitle'
 import Footer from '../components/Footer'
@@ -108,6 +109,7 @@ const ProductEditScreen = () => {
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0]
 
+    console.log(file)
     const formdata = new FormData()
     formdata.append('image', file)
     setUploading(true)
@@ -118,11 +120,11 @@ const ProductEditScreen = () => {
           'Content-Type': 'multipart/form-data',
         },
       }
-      const { data } = await axios.post('/upload', formdata, config)
+      const { data } = await api.post('/upload', formdata, config)
 
       setFormData((prev) => ({
         ...prev,
-        image: data,
+        image: data.Location,
       }))
       setUploading(false)
     } catch (error) {
@@ -203,12 +205,6 @@ const ProductEditScreen = () => {
               </div>
 
               <div className="mb-6">
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-semibold leading-6 text-gray-900"
-                >
-                  Name
-                </label>
                 <input
                   className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   type="file"
